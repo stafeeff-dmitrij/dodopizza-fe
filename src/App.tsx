@@ -1,6 +1,5 @@
 import './styles/styles.scss';
 
-
 function App() {
 	return (
 		<>Hello World</>

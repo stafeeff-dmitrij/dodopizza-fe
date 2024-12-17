@@ -1,8 +1,4 @@
-@import
-'normalize',
-'fonts',
-//'mixins',
-//'media',
-'variables',
-//'utils',
-'globals';
+@use 'normalize';
+@use 'fonts';
+@use 'variables';
+@use 'globals';
