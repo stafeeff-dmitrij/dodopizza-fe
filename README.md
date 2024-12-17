@@ -1,9 +1,9 @@
 # ДОДО ПИЦЦА
 
 ### Сделать
-- подключить cz commit
+- проверить cz commit
 
-Коммит:
+Коммит с использованием commitizen:
 ```
-git cz
+npm run commit
 ```

@@ -150,49 +150,49 @@ svg * {
 }
 @font-face {
   font-family: "Dodo";
-  src: url("../assets/fonts/DodoRounded_v2-Thin.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2-Thin.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Dodo";
-  src: url("../assets/fonts/DodoRounded_v2-ExtraLight.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2-ExtraLight.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Dodo";
-  src: url("../assets/fonts/DodoRounded_v2-Light.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Dodo";
-  src: url("../assets/fonts/DodoRounded_v2-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Dodo";
-  src: url("../assets/fonts/DodoRounded_v2-Medium.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Dodo";
-  src: url("../assets/fonts/DodoRounded_v2-Bold.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Dodo-VF";
-  src: url("../assets/fonts/DodoRounded_v2-VF.woff2") format("woff2");
+  src: url("../assets/fonts/DodoRoundedv2Variable-Regular.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
