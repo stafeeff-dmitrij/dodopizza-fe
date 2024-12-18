@@ -1,23 +1,48 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import App from './App.tsx';
-import Main from './pages/Main/Main.tsx';
-import NotFound from './pages/NotFound/NotFound.tsx';
+import { MainLayout, OrderLayout } from './layout';
+import { CatalogPage, CheckoutPage, NotAllowedPage, NotFoundPage, OrdersPage, ProductPage, ProfilePage } from './pages';
 
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <App/>,
+		element: <MainLayout />,
 		children: [
 			{
 				path: '/',
-				element: <Main />,
+				element: <CatalogPage />,
+			},
+			{
+				path: 'product/:id',
+				element: <ProductPage />,
+			},
+			{
+				path: 'profile',
+				element: <ProfilePage />,
+			},
+			{
+				path: 'not-allowed',
+				element: <NotAllowedPage />
 			},
 			{
 				path: '*',
-				element: <NotFound />
+				element: <NotFoundPage />
 			}
+		],
+	},
+	{
+		path: '/order',
+		element: <OrderLayout />,
+		children: [
+			{
+				path: 'checkout',
+				element: <CheckoutPage />,
+			},
+			{
+				path: 'history',
+				element: <OrdersPage />,
+			},
 		],
 	},
 ]);

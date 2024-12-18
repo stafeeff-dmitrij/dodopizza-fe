@@ -1,15 +1,15 @@
+import { Title } from '../../components/ui/Title/Title.tsx';
+
 
 /**
  * @component
  * @description Главная страница с каталогом товаров
  */
-function Main() {
+export function CatalogPage() {
 	return (
 		<div>
-			<h1>Главная страница</h1>
+			<Title text="Главная страница" size="xl"/>
 			<p>Здесь будет каталог товаров</p>
 		</div>
 	);
 }
-
-export default Main;

@@ -1,3 +1,4 @@
+import { Title } from '../../ui/Title/Title.tsx';
 
 /**
  * @component
@@ -5,7 +6,9 @@
  */
 function Header() {
 	return (
-		<div>Header</div>
+		<div>
+			<Title text="Header" size="sm" />
+		</div>
 	);
 }
 
