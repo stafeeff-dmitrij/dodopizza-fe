@@ -1,2 +1,2 @@
-export { MainLayout } from './Main/MainLayout.tsx';
-export { OrderLayout } from './Order/OrderLayout.tsx';
+export { Main } from './Main.tsx';
+export { Order } from './Order.tsx';

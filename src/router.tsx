@@ -1,47 +1,47 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { MainLayout, OrderLayout } from './layout';
-import { CatalogPage, CheckoutPage, NotAllowedPage, NotFoundPage, OrdersPage, ProductPage, ProfilePage } from './pages';
+import { Main, Order } from './layout';
+import { Catalog, Checkout, NotAllowed, NotFound, Orders, Product, Profile } from './pages';
 
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <MainLayout />,
+		element: <Main />,
 		children: [
 			{
 				path: '/',
-				element: <CatalogPage />,
+				element: <Catalog />,
 			},
 			{
 				path: 'product/:id',
-				element: <ProductPage />,
+				element: <Product />,
 			},
 			{
 				path: 'profile',
-				element: <ProfilePage />,
+				element: <Profile />,
 			},
 			{
 				path: 'not-allowed',
-				element: <NotAllowedPage />
+				element: <NotAllowed />
 			},
 			{
 				path: '*',
-				element: <NotFoundPage />
+				element: <NotFound />
 			}
 		],
 	},
 	{
 		path: '/order',
-		element: <OrderLayout />,
+		element: <Order />,
 		children: [
 			{
 				path: 'checkout',
-				element: <CheckoutPage />,
+				element: <Checkout />,
 			},
 			{
 				path: 'history',
-				element: <OrdersPage />,
+				element: <Orders />,
 			},
 		],
 	},
