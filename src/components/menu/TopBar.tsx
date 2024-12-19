@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Container } from './Container.tsx';
+import { Container } from '../layout/Container.tsx';
+import { LinkMenu } from '../shared';
 import { cn } from '../../lib';
-import { LinkMenu } from '../ui';
 
 
 interface Props {

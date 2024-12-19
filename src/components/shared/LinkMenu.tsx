@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { cn } from '../../lib';
 
-
 interface Props {
 	link: string;
 	name: string;

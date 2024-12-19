@@ -3,6 +3,7 @@ import { ArrowRight, ShoppingCart } from 'lucide-react';
 
 import { Button } from '../ui';
 import { cn } from '../../lib';
+import { TextSnippet } from '../typography';
 
 
 interface Props {
@@ -16,17 +17,21 @@ interface Props {
 export const CartButton: React.FC<Props> = ({ className }) => {
 
 	const loading = false;
+	const count = 2;
 
 	return (
 		<Button
 			loading={loading}
-			className={cn('group relative rounded-full', { 'w-[105px]': loading }, className)}
+			className={cn('group relative rounded-full', { 'w-[140px]': loading }, className)}
 		>
-			<b>500 ₽</b>
-			<span className="h-full w-[1px] bg-white/30 mx-3"/>
+			{count
+				? <TextSnippet text='500 ₽'/>
+				: <TextSnippet text='Корзина'/>
+			}
+			<span className="h-full w-[1px] bg-white/30 mx-1.5"/>
 			<div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
 				<ShoppingCart size={16} className="relative" strokeWidth={2}/>
-				<b>5</b>
+				<TextSnippet text='5'/>
 			</div>
 			<ArrowRight
 				size={20}
