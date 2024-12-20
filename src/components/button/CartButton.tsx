@@ -1,9 +1,9 @@
 import React from 'react';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 
-import { Button } from '../ui';
 import { cn } from '../../lib';
 import { TextSnippet } from '../typography';
+import { Button } from '../ui';
 
 
 interface Props {
@@ -22,7 +22,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
 	return (
 		<Button
 			loading={loading}
-			className={cn('group relative rounded-full', { 'w-[140px]': loading }, className)}
+			className={cn('group justify-around relative w-[145px]', className)}
 		>
 			{count
 				? <TextSnippet text='500 ₽'/>
@@ -35,7 +35,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
 			</div>
 			<ArrowRight
 				size={20}
-				className="absolute right-5 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+				className="absolute right-6 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
 			/>
 		</Button>
 	);

@@ -18,7 +18,7 @@ interface Props {
  */
 export const LinkMenu: React.FC<React.PropsWithChildren<Props>> = ({ link, name, children, className }) => {
 	return (
-		<Link to={link} className={cn('flex items-center gap-x-1.5 text-black hover:text-orange-600 transition duration-300', className)}>
+		<Link to={link} className={cn('flex items-center gap-x-1.5 text-black hover:text-[#ED5D08] transition duration-300', className)}>
 			{children}
 			<p className='font-medium text-[13px]'>{name}</p>
 		</Link>

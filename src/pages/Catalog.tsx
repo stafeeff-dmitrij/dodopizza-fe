@@ -1,5 +1,6 @@
 import { Container } from '../components/layout';
-import { Title } from '../components/typography/Title.tsx';
+import { Title } from '../components/typography';
+
 
 /**
  * @component
