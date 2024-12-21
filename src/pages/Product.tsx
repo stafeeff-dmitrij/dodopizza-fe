@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { Title } from '../components/typography/Title.tsx';
+import { Title } from '../components/typography';
 
 
 /**

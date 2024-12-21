@@ -1,1 +1,1 @@
-export { cn } from './utils.ts';
+export { cn, getEnvVariables } from './utils.ts';

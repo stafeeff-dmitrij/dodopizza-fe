@@ -81,37 +81,6 @@
 }
 
 /* кастомный тоненький аккуратный ползунок справа сбоку при скролле (вместо стандартного толстого уродливого) */
-.scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-  border-radius: 6px;
-  background: #fff;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-  background: #dbdadd;
-  border-radius: 6px;
-}
-
-.scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #dbdadd;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 /* плавный скролл */
 @media screen and (prefers-reduced-motion: reduce) {
   html {

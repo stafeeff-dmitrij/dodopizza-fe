@@ -20,7 +20,7 @@ interface Props {
 export const Header: React.FC<Props> = ({ hasSearch = true, className }) => {
 	return (
 		<header className={className}>
-			<Container className="flex items-center justify-between py-6">
+			<Container className="flex items-center justify-between pt-6 pb-4">
 				<LogoLink/>
 				{hasSearch && <SearchInput className="mx-12"/>}
 				<div className="flex items-center gap-2.5">

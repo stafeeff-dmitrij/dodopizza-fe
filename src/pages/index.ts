@@ -1,4 +1,5 @@
-export { Catalog } from './Catalog.tsx';
+export { Main } from './Main.tsx';
+export { Category } from './Category.tsx';
 export { Product } from './Product.tsx';
 export { Profile } from './Profile.tsx';
 export { Checkout } from './Checkout.tsx';

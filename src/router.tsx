@@ -1,17 +1,21 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { Main, Order } from './layout';
-import { Catalog, Checkout, NotAllowed, NotFound, Orders, Product, Profile } from './pages';
+import { Catalog, Order } from './layout';
+import { Main, Checkout, NotAllowed, NotFound, Orders, Product, Profile, Category } from './pages';
 
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Main />,
+		element: <Catalog />,
 		children: [
 			{
 				path: '/',
-				element: <Catalog />,
+				element: <Main />,
+			},
+			{
+				path: 'category/:id',
+				element: <Category />,
 			},
 			{
 				path: 'product/:id',

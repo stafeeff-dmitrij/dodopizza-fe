@@ -8,11 +8,11 @@ import { TopBar } from '../components/menu';
  * @component
  * @description Обертка-шаблон с header
  */
-export function Main() {
+export function Catalog() {
 	return (
-		<div className="px-5">
+		<div>
 			<TopBar/>
-			<Header hasSearch={true} hasCart={true} />
+			<Header hasSearch={true} />
 			<Outlet/>
 		</div>
 	);
