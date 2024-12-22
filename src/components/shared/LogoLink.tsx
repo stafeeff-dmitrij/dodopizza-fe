@@ -24,7 +24,7 @@ export const LogoLink: React.FC<Props> = ({ className }) => {
 					/>
 					<div className="flex flex-col">
 						<p className="text-xs">Сеть №1 в России</p>
-						<p className="text-xs text-[#ED5D08]">по количеству пиццерий</p>
+						<p className="text-xs text-primary">по количеству пиццерий</p>
 					</div>
 				</div>
 			</div>

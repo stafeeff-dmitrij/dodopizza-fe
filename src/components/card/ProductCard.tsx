@@ -24,7 +24,7 @@ interface Props {
  * @prop {string} image - URL изображения
  * @prop {number} price - стоимость товара
  */
-export const ProductCard: React.FC<Props> = ({ id, name, description, image, price, className }) => {
+export const ProductCard: React.FC<Props> = ({ name, description, image, price, className }) => {
 	return (
 		<div className={cn('flex flex-col justify-between min-w-[233px]', className)}>
 			<div>

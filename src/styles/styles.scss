@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+// плавный скролл при кликах по href
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
     --background: 0, 0%, 100%;  // Цвет фона всего приложения

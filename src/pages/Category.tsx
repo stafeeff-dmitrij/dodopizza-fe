@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
+
 import { Title } from '../components/typography';
+import { Container } from '../components/layout';
 
 
 /**
@@ -12,8 +14,10 @@ export function Category() {
 
 	return (
 		<div>
-			<Title text={`Категория #${id}`} size="xl"/>
-		<p>Здесь будут товары категории №{id}</p>
-	</div>
-);
+			<Container>
+				<Title text={`Категория #${id}`} size="xl"/>
+				<p>Здесь будут товары категории №{id}</p>
+			</Container>
+		</div>
+	);
 }

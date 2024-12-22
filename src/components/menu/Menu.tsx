@@ -44,10 +44,16 @@ export const Menu: React.FC<Props> = ({ categories, isLoading, className }) => {
 
 	return (
 		<nav
-			className={cn('flex items-center h-14 sticky top-0 bg-white py-2', { 'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-10 backdrop-blur-[20px] bg-white/75': isSticky }, className)}
+			className={cn(
+				'flex items-center h-14 sticky top-[-1px] bg-white py-2',
+				{
+					'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-10 backdrop-blur-[20px] bg-white/75': isSticky
+				}
+				, className
+			)}
 			ref={menuRef}
 		>
-			<Container className="flex items-center justify-between ">
+			<Container className="flex items-center justify-between gap-5">
 				{isLoading
 					? <MenuSkeleton/>
 					: <div className="flex items-center gap-4">
