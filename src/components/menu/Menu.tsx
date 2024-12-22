@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { Container } from '../layout';
 import { cn } from '../../lib';
-import { CategoryProps } from '../../redux/api/categoryApi.ts';
+import { Category } from '../../redux/api/categoryApi.ts';
 import { Categories } from './Categories.tsx';
 import { MenuSkeleton } from '../skeleton';
 import { CartButton } from '../button';
@@ -11,7 +11,7 @@ import { LogoImg } from '../shared';
 
 interface Props {
 	isLoading: boolean;
-	categories: CategoryProps[];
+	categories: Category[];
 	className?: string;
 }
 
@@ -20,7 +20,7 @@ interface Props {
  * @description Меню для вывода категорий товаров
  *
  * @prop {boolean} isLoading - статус загрузки
- * @prop {CategoryProps[]} categories - категории товаров
+ * @prop {Category[]} categories - категории товаров
  */
 export const Menu: React.FC<Props> = ({ categories, isLoading, className }) => {
 
@@ -44,7 +44,7 @@ export const Menu: React.FC<Props> = ({ categories, isLoading, className }) => {
 
 	return (
 		<nav
-			className={cn('h-14 sticky top-0 bg-white py-2', { 'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] shadow-black/5 z-10 backdrop-blur-[40px] bg-white/30': isSticky }, className)}
+			className={cn('flex items-center h-14 sticky top-0 bg-white py-2', { 'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-10 backdrop-blur-[20px] bg-white/75': isSticky }, className)}
 			ref={menuRef}
 		>
 			<Container className="flex items-center justify-between ">

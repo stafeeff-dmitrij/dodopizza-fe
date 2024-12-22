@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { CategoryProps } from '../../redux/api/categoryApi.ts';
+import { Category } from '../../redux/api/categoryApi.ts';
 import { cn } from '../../lib';
 import { LinkMenu } from '../shared';
 
 
 interface Props {
-	categories: CategoryProps[];
+	categories: Category[];
 	className?: string;
 }
 
@@ -14,7 +14,7 @@ interface Props {
  * @component
  * @description Блок с категориями товаров
  *
- * @prop {CategoryProps[]} categories - категории товаров
+ * @prop {Category[]} categories - категории товаров
  */
 export const Categories: React.FC<Props> = ({ categories, className }) => {
 	return (

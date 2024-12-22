@@ -1,8 +1,7 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 
-import { Container } from '../components/layout';
-import { Title } from '../components/typography';
+import { Container, ProductsGroupList } from '../components/layout';
 import { Menu } from '../components/menu';
 import { useGetCategoriesQuery } from '../redux/api';
 
@@ -26,15 +25,25 @@ export function Main() {
 	}, []);
 
 	return (
-		// TODO Временно для скролла
-		<div className="h-[2000px]">
+		<div>
 			{isSuccess && <Menu categories={data} isLoading={isLoading} />}
-			<Container className="mt-5 pb-14">
-				<Title text="Главная страница" size="xl"/>
-				<Title text='Здесь будет каталог товаров' size='md' className="text-red-400" />
-				<Title text='Здесь будет каталог товаров' size='md' className="text-red-400" />
-				<Title text='Здесь будет каталог товаров' size='md'/>
-				<Title text='Здесь будет каталог товаров' size='md'/>
+			<Container className="flex gap-[80px] mt-5 pb-14">
+
+				<div className="flex-1">
+					<div className="flex flex-col gap-16">
+						{isSuccess && data.map(category => (
+							category.products.length > 0 && (
+								<ProductsGroupList
+									key={category.id}
+									title={category.name}
+									categoryId={category.id}
+									products={category.products}
+								/>
+							)
+						))}
+					</div>
+				</div>
+
 			</Container>
 		</div>
 	);
