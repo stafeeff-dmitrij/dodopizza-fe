@@ -7,8 +7,6 @@ import { Toaster } from 'react-hot-toast';
 import { store } from './redux/store.ts';
 import router from './router.tsx';
 
-import './styles/styles.scss';
-
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

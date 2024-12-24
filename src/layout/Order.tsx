@@ -9,10 +9,10 @@ import { Container } from '../components/layout';
  */
 export function Order() {
 	return (
-		<div>
+		<>
 			<Container>
 				<Outlet/>
 			</Container>
-		</div>
+		</>
 	);
 }

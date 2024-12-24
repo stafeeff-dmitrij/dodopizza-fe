@@ -2,52 +2,59 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { Catalog, Order } from './layout';
 import { Main, Checkout, NotAllowed, NotFound, Orders, Product, Profile, Category } from './pages';
+import App from './App.tsx';
 
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Catalog />,
+		element: <App />,
 		children: [
 			{
 				path: '/',
-				element: <Main />,
+				element: <Catalog />,
+				children: [
+					{
+						path: '/',
+						element: <Main />,
+					},
+					{
+						path: 'category/:id',
+						element: <Category />,
+					},
+					{
+						path: 'product/:id',
+						element: <Product />,
+					},
+					{
+						path: 'profile',
+						element: <Profile />,
+					},
+					{
+						path: 'not-allowed',
+						element: <NotAllowed />
+					},
+					{
+						path: '*',
+						element: <NotFound />
+					}
+				],
 			},
 			{
-				path: 'category/:id',
-				element: <Category />,
+				path: '/order',
+				element: <Order />,
+				children: [
+					{
+						path: 'checkout',
+						element: <Checkout />,
+					},
+					{
+						path: 'history',
+						element: <Orders />,
+					},
+				],
 			},
-			{
-				path: 'product/:id',
-				element: <Product />,
-			},
-			{
-				path: 'profile',
-				element: <Profile />,
-			},
-			{
-				path: 'not-allowed',
-				element: <NotAllowed />
-			},
-			{
-				path: '*',
-				element: <NotFound />
-			}
-		],
-	},
-	{
-		path: '/order',
-		element: <Order />,
-		children: [
-			{
-				path: 'checkout',
-				element: <Checkout />,
-			},
-			{
-				path: 'history',
-				element: <Orders />,
-			},
-		],
+		]
 	},
 ]);
 

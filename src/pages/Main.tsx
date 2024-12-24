@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { Container, ProductsGroupList } from '../components/layout';
-import { Menu } from '../components/menu';
-import { useGetCategoriesQuery } from '../redux/api';
 import { getErrorDataToast } from '../lib';
+import { useGetAllProductsQuery } from '../redux/api';
 
 
 /**
@@ -12,7 +11,7 @@ import { getErrorDataToast } from '../lib';
  */
 export function Main() {
 
-	const { data, isLoading, isSuccess, isError } = useGetCategoriesQuery();
+	const { data, isLoading, isSuccess, isError } = useGetAllProductsQuery();
 
 	React.useEffect(() => {
 		if (isError) {
@@ -22,10 +21,11 @@ export function Main() {
 
 	return (
 		<div>
-			{isSuccess && <Menu categories={data.filter(category => category.products.length > 0)} isLoading={isLoading} />}
 			<Container className="flex gap-[80px] mt-5 pb-14">
 				<div className="flex-1">
 					<div className="flex flex-col gap-16">
+						{/* TODO Добавить скелетон */}
+						{isLoading && <p>Идет загрузка</p> }
 						{isSuccess && data.map(category => (
 							category.products.length > 0 && (
 								<ProductsGroupList

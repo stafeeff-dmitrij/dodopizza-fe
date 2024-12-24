@@ -11,6 +11,7 @@ interface Props {
 	description: string;
 	price: number;
 	image: string;
+	count: number;
 	className?: string;
 }
 
@@ -22,9 +23,10 @@ interface Props {
  * @prop {string} name - название товара
  * @prop {string} description - описание товара
  * @prop {string} image - URL изображения
+ * @prop {number} count - кол-во товара
  * @prop {number} price - стоимость товара
  */
-export const ProductCard: React.FC<Props> = ({ name, description, image, price, className }) => {
+export const ProductCard: React.FC<Props> = ({ name, description, image, price, count, className }) => {
 	return (
 		<div className={cn('flex flex-col justify-between min-w-[233px]', className)}>
 			<div>
@@ -38,9 +40,14 @@ export const ProductCard: React.FC<Props> = ({ name, description, image, price, 
 				<span className="text-[16px] font-semibold">
 					от <b>{price} ₽</b>
 				</span>
-				<Button variant="secondary" className="px-7 py-2 text-[16px] font-normal">
-					Выбрать
-				</Button>
+				{count > 0
+					? <Button variant="secondary" className="px-7 py-2 text-[16px] font-normal">
+						Выбрать
+					</Button>
+					: <Button variant="light" disabled={true} className="px-5 py-2 text-[16px] font-normal">
+						Закончился
+					</Button>
+				}
 			</div>
 		</div>
 	);

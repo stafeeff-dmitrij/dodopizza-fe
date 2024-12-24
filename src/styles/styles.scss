@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// плавный скролл при кликах по href
-html {
-  scroll-behavior: smooth;
-}
-
 @layer base {
   :root {
     --background: 0, 0%, 100%;  // Цвет фона всего приложения
@@ -77,6 +72,18 @@ html {
   font-family: 'Dodo', sans-serif;
 }
 
+// плавный скролл при клике по href
+html {
+  scroll-behavior: smooth;
+}
+
+/* отключение плавного скролла в зависимости от настроек пользователя */
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* кастомный тоненький аккуратный ползунок справа сбоку при скролле (вместо стандартного толстого уродливого) */
 //.scrollbar::-webkit-scrollbar {
 //  width: 4px;
@@ -110,10 +117,3 @@ html {
 //    @apply bg-background text-foreground;
 //  }
 //}
-
-/* плавный скролл */
-@media screen and (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}

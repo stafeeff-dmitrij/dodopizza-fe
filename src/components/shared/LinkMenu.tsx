@@ -20,7 +20,7 @@ export const LinkMenu: React.FC<React.PropsWithChildren<Props>> = ({ link, name,
 	return (
 		<Link to={link} className={cn('flex items-center gap-x-1.5 text-black hover:text-primary transition duration-300', className)}>
 			{children}
-			{name && <p className='font-medium text-[13px]'>{name}</p>}
+			{name && <p className='font-medium text-[13px] text-center'>{name}</p>}
 		</Link>
 	);
 };

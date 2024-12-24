@@ -13,6 +13,6 @@ export const baseApi = createApi({
 			'Content-Type': 'application/json',
 		},
 	}),
-	tagTypes: ['categories'],
+	tagTypes: ['categories', 'all_products', 'products'],
 	endpoints: () => ({}),
 });

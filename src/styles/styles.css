@@ -51,10 +51,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html {
-  scroll-behavior: smooth;
-}
-
 @layer base {
   :root {
     --background: 0, 0%, 100%;
@@ -84,12 +80,16 @@ html {
   font-family: "Dodo", sans-serif;
 }
 
-/* кастомный тоненький аккуратный ползунок справа сбоку при скролле (вместо стандартного толстого уродливого) */
-/* плавный скролл */
+html {
+  scroll-behavior: smooth;
+}
+
+/* отключение плавного скролла в зависимости от настроек пользователя */
 @media screen and (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 }
+/* кастомный тоненький аккуратный ползунок справа сбоку при скролле (вместо стандартного толстого уродливого) */
 
 /*# sourceMappingURL=styles.css.map */

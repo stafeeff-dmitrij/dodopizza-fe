@@ -1,28 +1,25 @@
 import React, { useRef, useState } from 'react';
 
 import { Container } from '../layout';
-import { cn } from '../../lib';
-import { Category } from '../../redux/api/categoryApi.ts';
 import { Categories } from './Categories.tsx';
 import { MenuSkeleton } from '../skeleton';
 import { CartButton } from '../button';
 import { LogoImg } from '../shared';
+import { cn } from '../../lib';
+import { useGetCategoriesQuery } from '../../redux/api';
 
 
 interface Props {
-	isLoading: boolean;
-	categories: Category[];
 	className?: string;
 }
 
 /**
  * @component
- * @description Меню для вывода категорий товаров
- *
- * @prop {boolean} isLoading - статус загрузки
- * @prop {Category[]} categories - категории товаров
+ * @description Меню с категориями товаров
  */
-export const Menu: React.FC<Props> = ({ categories, isLoading, className }) => {
+export const Menu: React.FC<Props> = ({ className }) => {
+
+	const { data, isLoading, isSuccess } = useGetCategoriesQuery();
 
 	const [isSticky, setIsSticky] = useState(false);
 	const menuRef = useRef<HTMLElement>(null);
@@ -54,11 +51,11 @@ export const Menu: React.FC<Props> = ({ categories, isLoading, className }) => {
 			ref={menuRef}
 		>
 			<Container className="flex items-center justify-between gap-5">
-				{isLoading
-					? <MenuSkeleton/>
-					: <div className="flex items-center gap-4">
-						<LogoImg className={cn({'hidden': !isSticky})} size="36px"/>
-						<Categories categories={categories}/>
+				{isLoading && <MenuSkeleton/>}
+				{isSuccess &&
+					<div className="flex items-center gap-4">
+						<LogoImg className={cn({ 'hidden': !isSticky })} size="36px"/>
+						<Categories categories={data}/>
 					</div>
 				}
 				<CartButton/>

@@ -5,9 +5,9 @@ import { useIntersection } from 'react-use';
 
 import { AppDispatch } from '../../redux/store.ts';
 import { setActiveId } from '../../redux/slices/crossCategorySlice.ts';
-import { Product } from '../../redux/api/categoryApi.ts';
 import { Title } from '../typography';
-import { ProductCard } from '../card';
+import { ProductsList } from './ProductsList.tsx';
+import { Product } from '../../redux/api/productApi.ts';
 
 
 interface Props {
@@ -39,7 +39,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 	// @ts-ignore
 	// пример из документации - https://streamich.github.io/react-use/?path=/story/sensors-useintersection--docs
 	const cross = useIntersection(crossRef, {
-		threshold: 0.2,
+		threshold: [0.3, 0.5],
 	});
 
 	// изменение активной категории при скролле
@@ -56,18 +56,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 			<Link to={`category/${categoryId}`}>
 				<Title text={title} size="lg" className="font-medium mb-8 hover:text-primary transition duration-300"/>
 			</Link>
-			<div className={'grid grid-cols-4 gap-x-8 gap-y-14'}>
-				{products.map((product) => (
-					<ProductCard
-						key={product.id}
-						id={product.id}
-						name={product.name}
-						description={product.description}
-						image={product.image}
-						price={300}
-					/>
-				))}
-			</div>
+			<ProductsList products={products} />
 		</div>
 	);
 };
