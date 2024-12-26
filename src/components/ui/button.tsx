@@ -23,6 +23,7 @@ const buttonVariants = cva(
 				destructive:
 					'bg-destructive text-destructive-foreground hover:bg-[#eb3b30]',
 				link: 'text-foreground underline-offset-4 hover:text-primary hover:underline',
+				block: 'bg-[#666565]',
 			},
 			size: {
 				default: 'h-10 px-5 py-2',

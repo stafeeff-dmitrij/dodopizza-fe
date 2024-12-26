@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { LogoImg } from '../shared';
 import { cn } from '../../lib';
-import { LogoImg } from './LogoImg.tsx';
+
 
 interface Props {
 	className?: string;
@@ -12,7 +13,7 @@ interface Props {
  * @component
  * @description Ссылка-логотип
  */
-export const LogoLink: React.FC<Props> = ({ className }) => {
+export const LinkLogo: React.FC<Props> = ({ className }) => {
 	return (
 		<Link to="/">
 			<div className={cn('flex items-start gap-4', className)}>

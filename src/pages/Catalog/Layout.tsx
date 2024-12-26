@@ -1,20 +1,20 @@
 import { Outlet } from 'react-router-dom';
 
-import { Header } from '../components/layout';
-import { Menu, TopBar } from '../components/menu';
+import { MainMenu, TopBar } from '../../components/menu';
+import { Header } from '../../components/Header';
 
 
 /**
  * @component
  * @description Обертка-шаблон для каталога товаров
  */
-export function Catalog() {
+export function Layout() {
 
 	return (
 		<>
 			<TopBar/>
 			<Header hasSearch={true}/>
-			<Menu/>
+			<MainMenu/>
 			<Outlet/>
 		</>
 	);

@@ -1,1 +1,0 @@
-export { MenuSkeleton } from './MenuSkeleton.tsx';

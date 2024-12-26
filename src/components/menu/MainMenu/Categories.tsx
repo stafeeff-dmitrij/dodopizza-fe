@@ -2,10 +2,10 @@ import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { cn } from '../../lib';
-import { Category } from '../../redux/api/categoryApi.ts';
-import { selectActiveId } from '../../redux/slices/crossCategorySlice.ts';
-import { LinkMenu } from '../shared';
+import { cn } from '../../../lib';
+import { Category } from '../../../redux/api/categoryApi.ts';
+import { selectCategory } from '../../../redux/slices/categorySlice.ts';
+import { LinkMenu } from '../../shared';
 
 
 interface Props {
@@ -23,7 +23,7 @@ export const Categories: React.FC<Props> = ({ categories, className }) => {
 
 	const { pathname } = useLocation();
 	const { id } = useParams();
-	const { activeId } = useSelector(selectActiveId);
+	const { activeId } = useSelector(selectCategory);
 
 	return (
 		<div className={cn('inline-flex gap-5 p-1', className)}>

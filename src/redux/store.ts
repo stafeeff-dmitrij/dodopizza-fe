@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { baseApi } from './api';
-import crossCategoryReducer from './slices/crossCategorySlice.ts';
+import categoryReducer from './slices/categorySlice.ts';
 
 
 export const store = configureStore({
 	reducer: {
-		crossCategory: crossCategoryReducer,
+		category: categoryReducer,
 		[baseApi.reducerPath]: baseApi.reducer,
 	},
 	middleware: (getMiddleware) => getMiddleware().concat(baseApi.middleware),

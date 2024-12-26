@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useIntersection } from 'react-use';
 
-import { AppDispatch } from '../../redux/store.ts';
-import { setActiveId } from '../../redux/slices/crossCategorySlice.ts';
-import { Title } from '../typography';
+import { AppDispatch } from '../../../redux/store.ts';
+import { setActiveId } from '../../../redux/slices/categorySlice.ts';
+import { Title } from '../../../components/typography';
 import { ProductsList } from './ProductsList.tsx';
-import { Product } from '../../redux/api/productApi.ts';
+import { Product } from '../../../redux/api/productApi.ts';
 
 
 interface Props {

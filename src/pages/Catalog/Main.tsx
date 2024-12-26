@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Container, ProductsGroupList } from '../components/layout';
-import { getErrorDataToast } from '../lib';
-import { useGetAllProductsQuery } from '../redux/api';
+import { Container } from '../../components/layout';
+import { getErrorDataToast } from '../../lib';
+import { ProductsGroupList } from '../../features/catalog/components';
+import { useGetAllProductsQuery } from '../../redux/api';
+import { useTitle } from 'react-use';
 
 
 /**
@@ -10,6 +12,8 @@ import { useGetAllProductsQuery } from '../redux/api';
  * @description Главная страница со всеми товарами
  */
 export function Main() {
+
+	useTitle('ДОДО ПИЦЦА - самая вкусная пицца во вселенной!');
 
 	const { data, isLoading, isSuccess, isError } = useGetAllProductsQuery();
 
@@ -24,7 +28,6 @@ export function Main() {
 			<Container className="flex gap-[80px] mt-5 pb-14">
 				<div className="flex-1">
 					<div className="flex flex-col gap-16">
-						{/* TODO Добавить скелетон */}
 						{isLoading && <p>Идет загрузка</p> }
 						{isSuccess && data.map(category => (
 							category.products.length > 0 && (

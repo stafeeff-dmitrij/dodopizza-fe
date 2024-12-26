@@ -12,7 +12,7 @@ interface Props {
  * @description Контейнер для ограничения максимальной ширины страницы и центрирования дочерних компонентов
  */
 export const Container: React.FC<React.PropsWithChildren<Props>> = ({ className, children }) => {
-	return <div className={cn("mx-auto max-w-[1024px]", className)}>
+	return <div className={cn("mx-auto max-w-[1060px]", className)}>
 		{children}
 	</div>;
 };

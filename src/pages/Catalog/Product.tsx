@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 
-import { Title } from '../components/typography';
-import { Container } from '../components/layout';
+import { Title } from '../../components/typography';
+import { Container } from '../../components/layout';
 
 
 /**

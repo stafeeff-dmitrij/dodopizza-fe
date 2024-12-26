@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 
-import { Container } from '../layout';
 import { Categories } from './Categories.tsx';
-import { MenuSkeleton } from '../skeleton';
-import { CartButton } from '../button';
-import { LogoImg } from '../shared';
-import { cn } from '../../lib';
-import { useGetCategoriesQuery } from '../../redux/api';
+import { LogoImg } from '../../shared';
+import { MainMenuSkeleton } from './MainMenuSkeleton.tsx';
+import { cn } from '../../../lib';
+import { useGetCategoriesQuery } from '../../../redux/api';
+import { CartButton } from './CartButton.tsx';
+import { Container } from '../../layout';
 
 
 interface Props {
@@ -15,9 +15,9 @@ interface Props {
 
 /**
  * @component
- * @description Меню с категориями товаров
+ * @description Главное меню с категориями товаров
  */
-export const Menu: React.FC<Props> = ({ className }) => {
+export const MainMenu: React.FC<Props> = ({ className }) => {
 
 	const { data, isLoading, isSuccess } = useGetCategoriesQuery();
 
@@ -44,14 +44,14 @@ export const Menu: React.FC<Props> = ({ className }) => {
 			className={cn(
 				'flex items-center h-14 sticky top-[-1px] bg-white py-2',
 				{
-					'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-10 backdrop-blur-[20px] bg-white/75': isSticky
+					'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-10 backdrop-blur-[20px] bg-white/75': isSticky,
 				}
 				, className
 			)}
 			ref={menuRef}
 		>
-			<Container className="flex items-center justify-between gap-5">
-				{isLoading && <MenuSkeleton/>}
+			<Container className="flex items-center justify-between gap-14">
+				{isLoading && <MainMenuSkeleton/>}
 				{isSuccess &&
 					<div className="flex items-center gap-4">
 						<LogoImg className={cn({ 'hidden': !isSticky })} size="36px"/>

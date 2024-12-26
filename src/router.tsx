@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { Catalog, Order } from './layout';
-import { Main, Checkout, NotAllowed, NotFound, Orders, Product, Profile, Category } from './pages';
 import App from './App.tsx';
+import { Layout as CatalogLayout } from './pages/Catalog/Layout.tsx';
+import { Layout as OrderLayout } from './pages/Order/Layout.tsx';
+import { Main, Checkout, NotAllowed, NotFound, Orders, Product, Profile, Category } from './pages';
 
 
 const router = createBrowserRouter([
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Catalog />,
+				element: <CatalogLayout />,
 				children: [
 					{
 						path: '/',
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/order',
-				element: <Order />,
+				element: <OrderLayout />,
 				children: [
 					{
 						path: 'checkout',

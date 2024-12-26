@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { cn } from '../../lib';
-import { Skeleton } from '../ui';
+import { cn } from '../../../lib';
+import { Skeleton } from '../../ui';
 
 interface Props {
 	className?: string;
@@ -11,7 +11,7 @@ interface Props {
  * @component
  * @description Лоадер для меню категорий
  */
-export const MenuSkeleton: React.FC<Props> = ({ className }) => {
+export const MainMenuSkeleton: React.FC<Props> = ({ className }) => {
 	return (
 		<div className={cn('inline-flex gap-5 p-1', className)}>
 			{

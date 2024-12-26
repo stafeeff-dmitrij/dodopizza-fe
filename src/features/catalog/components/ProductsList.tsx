@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ProductCard } from '../card';
-import { Product } from '../../redux/api/productApi.ts';
-import { cn } from '../../lib';
+import { cn } from '../../../lib';
+import { Product } from '../../../redux/api/productApi.ts';
+import { ProductCard } from './ProductCard.tsx';
 
 
 interface Props {

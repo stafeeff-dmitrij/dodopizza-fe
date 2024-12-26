@@ -1,9 +1,9 @@
 import React from 'react';
 import { ArrowRight, ShoppingCart } from 'lucide-react';
 
-import { cn } from '../../lib';
-import { TextSnippet } from '../typography';
-import { Button } from '../ui';
+import { cn } from '../../../lib';
+import { TextSnippet } from '../../typography';
+import { Button } from '../../ui';
 
 
 interface Props {

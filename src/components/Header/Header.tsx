@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Container } from './Container.tsx';
-import { LogoLink } from '../shared';
-import { SearchInput } from '../input';
-import { ProfileButton } from '../button';
+import { Container } from '../layout';
+import { SearchInput } from './SearchInput.tsx';
+import { ProfileButton } from './ProfileButton.tsx';
+import { LinkLogo } from './LinkLogo.tsx';
 
 
 interface Props {
@@ -21,7 +21,7 @@ export const Header: React.FC<Props> = ({ hasSearch = true, className }) => {
 	return (
 		<header className={className}>
 			<Container className="flex items-center justify-between pt-6 pb-4">
-				<LogoLink/>
+				<LinkLogo/>
 				{hasSearch && <SearchInput className="mx-12"/>}
 				<div className="flex items-center gap-2.5">
 					<ProfileButton onClickSignIn={() => console.log('Типа открытие модального окна')} />
