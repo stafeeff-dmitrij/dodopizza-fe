@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from '../../components/layout';
 import { getErrorDataToast } from '../../lib';
-import { ProductsGroupList } from '../../features/catalog/components';
+import { CarouselMain, ProductsGroupList } from '../../features/catalog/components';
 import { useGetAllProductsQuery } from '../../redux/api';
 import { useTitle } from 'react-use';
 
@@ -25,6 +25,7 @@ export function Main() {
 
 	return (
 		<div>
+			<CarouselMain/>
 			<Container className="flex gap-[80px] mt-5 pb-14">
 				<div className="flex-1">
 					<div className="flex flex-col gap-16">
