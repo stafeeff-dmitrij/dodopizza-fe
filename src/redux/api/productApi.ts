@@ -6,6 +6,8 @@ export interface Product {
 	name: string,
 	description: string,
 	image: string,
+	min_price: number,
+	variation_have: boolean,
 	count: number,
 }
 
@@ -44,7 +46,16 @@ export const productApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ['products'],
 		}),
+
+		// детальная информация о товаре
+		getDetailProduct: builder.query<Product, { product_id?: number}>({
+			query: (query) => ({
+				url: `products/${query.product_id}`,
+				params: query,
+			}),
+			providesTags: ['product_detail'],
+		}),
 	}),
 });
 
-export const { useGetAllProductsQuery, useGetFilterProductsQuery } = productApi;
+export const { useGetAllProductsQuery, useGetFilterProductsQuery, useGetDetailProductQuery } = productApi;

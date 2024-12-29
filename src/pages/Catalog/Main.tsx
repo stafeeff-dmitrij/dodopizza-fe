@@ -1,10 +1,11 @@
 import React from 'react';
+import { useTitle } from 'react-use';
 
 import { Container } from '../../components/layout';
-import { getErrorDataToast } from '../../lib';
-import { CarouselMain, ProductsGroupList } from '../../features/catalog/components';
+import { CarouselMain, ChooseProductModal, ProductsGroupList } from '../../features/catalog/components';
+
 import { useGetAllProductsQuery } from '../../redux/api';
-import { useTitle } from 'react-use';
+import { getErrorDataToast } from '../../lib';
 
 
 /**
@@ -43,6 +44,7 @@ export function Main() {
 					</div>
 				</div>
 			</Container>
+			<ChooseProductModal/>
 		</div>
 	);
 }

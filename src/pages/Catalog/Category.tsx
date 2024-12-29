@@ -1,15 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTitle } from 'react-use';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Title } from '../../components/typography';
 import { Container } from '../../components/layout';
-import { getErrorDataToast } from '../../lib';
-import { selectCategory, setActiveId } from '../../redux/slices/categorySlice.ts';
-import { useDispatch, useSelector } from 'react-redux';
+import { ChooseProductModal, ProductsList } from '../../features/catalog/components';
+
 import { AppDispatch } from '../../redux/store.ts';
+import { selectCategory, setActiveId } from '../../redux/slices/categorySlice.ts';
 import { useGetFilterProductsQuery } from '../../redux/api';
-import { ProductsList } from '../../features/catalog/components';
+import { getErrorDataToast } from '../../lib';
 
 
 /**
@@ -18,12 +19,12 @@ import { ProductsList } from '../../features/catalog/components';
  */
 export function Category() {
 
-	const dispatch = useDispatch<AppDispatch>();
-	const { categories } = useSelector(selectCategory);
 	const { id } = useParams();
-
 	const { data, isLoading, isSuccess, isError } = useGetFilterProductsQuery({ category_id: id });
 
+	const dispatch = useDispatch<AppDispatch>();
+
+	const { categories } = useSelector(selectCategory);
 	const foundCategory = categories.find(category => category.id === Number(id)) ?? { name: 'Товары' };
 
 	useTitle(`ДОДО ПИЦЦА - выбор товаров среди "${foundCategory.name}"`);
@@ -36,9 +37,7 @@ export function Category() {
 
 	// установка активной категории
 	React.useEffect(() => {
-		{
-			id && dispatch(setActiveId(Number(id)));
-		}
+		id && dispatch(setActiveId(Number(id)));
 	}, [id]);
 
 	return (
@@ -58,6 +57,7 @@ export function Category() {
 					{isSuccess && <ProductsList products={data.results} className="grid-cols-3 gap-x-5"/>}
 				</div>
 			</Container>
+			<ChooseProductModal/>
 		</div>
 	);
 }

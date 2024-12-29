@@ -13,13 +13,18 @@ const initialState: State = {
 	categories: []
 };
 
+/**
+ * Слайс для управления состоянием активной категории товаров
+ */
 export const categorySlice = createSlice({
 	name: 'category',
 	initialState,
 	reducers: {
+		// установка активной категории
 		setActiveId: (state, action: PayloadAction<number>) => {
 			state.activeId = action.payload;
 		},
+		// сохранение категорий
 		setCategories: (state, action: PayloadAction<Category[]>) => {
 			state.categories = action.payload;
 		},

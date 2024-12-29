@@ -38,8 +38,8 @@ export const CarouselMain: React.FC<Props> = ({ className }) => {
 				]}
 			>
 				<CarouselContent className='w-full'>
-					{sliders.map(image =>
-						<CarouselItem className='basis-[1060px]'>
+					{sliders.map((image, index) =>
+						<CarouselItem key={index} className='basis-[1060px]'>
 							<img
 								className='rounded-[20px]'
 								src={image}

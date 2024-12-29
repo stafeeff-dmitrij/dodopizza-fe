@@ -1,4 +1,6 @@
-export { ProductsGroupList } from './ProductsGroupList.tsx';
-export { ProductsList } from './ProductsList.tsx';
-export { ProductCard } from './ProductCard.tsx';
 export { CarouselMain } from './CarouselMain.tsx';
+export { ProductsGroupList } from './product';
+export { ProductsList } from './product';
+export { ProductCard } from './product';
+export { ChooseProductModal } from './ChoiceProductModal.tsx';
+export { ProductForm } from './form';
