@@ -1,0 +1,1 @@
+export { PizzaImage } from './PizzaImage.tsx';

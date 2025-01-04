@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../../components/ui';
 import { ProductForm } from './form';
@@ -42,6 +43,7 @@ export const ChooseProductModal: React.FC<Props> = ({ className }) => {
 		}
 	}, [activeProduct])
 
+	// чтобы не было ошибки при рендере страницы с товарами, когда активный товар еще не выбран
 	if (!activeProduct) {
 		return null;
 	}
@@ -49,17 +51,14 @@ export const ChooseProductModal: React.FC<Props> = ({ className }) => {
 	return (
 		<Dialog open={openModal} onOpenChange={() => onCloseModalClick()}>
 			<DialogContent
-				className={cn(
-					'p-0 w-[1060px] max-w-[1060px] min-h-[550px] bg-white overflow-hidden',
-					className,
-				)}
+				className={cn('inline-table p-0 sm:rounded-[20px] overflow-hidden', className)}
 			>
 				<ProductForm productId={activeProduct.id} closeModal={onCloseModalClick} />
-
-				{/* в консоли ругается, что DialogTitle обязателен при использовании DialogContent */}
-				<DialogTitle>Товар</DialogTitle>
-				<DialogDescription>Описание товара</DialogDescription>
-
+				{/* визуально скрываем заголовок и описание (обязательны внутри DialogContent) */}
+				<VisuallyHidden>
+					<DialogTitle>{activeProduct.name}</DialogTitle>
+					<DialogDescription>{activeProduct.description}</DialogDescription>
+				</VisuallyHidden>
 			</DialogContent>
 		</Dialog>
 	);

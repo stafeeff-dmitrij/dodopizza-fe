@@ -1,6 +1,6 @@
-export { CarouselMain } from './CarouselMain.tsx';
-export { ProductsGroupList } from './product';
-export { ProductsList } from './product';
-export { ProductCard } from './product';
-export { ChooseProductModal } from './ChoiceProductModal.tsx';
+export { CarouselMain } from './widget';
+export { ProductsGroupList } from './products';
+export { ProductsList } from './products';
+export { ProductCard } from './products';
 export { ProductForm } from './form';
+export { ChooseProductModal } from './ChoiceProductModal.tsx';

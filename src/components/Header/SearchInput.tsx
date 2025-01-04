@@ -31,6 +31,11 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 		setSearchQuery('');
 	};
 
+	// отключаем скролл при фокусе
+	React.useEffect(() => {
+		document.body.style.overflow = focused ? 'hidden' : '';
+	}, [focused]);
+
 	return (
 		<>
 			{focused && <div className="fixed top-0 left-0 bottom-0 right-0 bg-black/40 z-30"/>}

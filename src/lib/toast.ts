@@ -23,3 +23,15 @@ export function getErrorDataToast() {
 		});
 	}, 200);
 }
+
+/**
+ * @function
+ * @description Вывод успешного уведомления
+ */
+export function getSuccessToast(message: string) {
+	setTimeout(() => {
+		toast.success(message, {
+			duration: 3000,
+		});
+	}, 200);
+}

@@ -1,5 +1,12 @@
 import { baseApi } from './baseApi.ts';
+import { TPizzaSize, TPizzaType } from '../../features/catalog/constants.ts';
 
+
+export interface CategoryWithProduct {
+	id: number,
+	name: string,
+	products: Product[],
+}
 
 export interface Product {
 	id: number,
@@ -11,18 +18,42 @@ export interface Product {
 	count: number,
 }
 
-export interface CategoryWithProduct {
-	id: number,
-	name: string,
-	products: Product[],
-}
-
 export interface ProductWithPagination {
 	count: number,
 	total_pages: number,
 	next: string,
 	previous: string,
 	results: Product[],
+}
+
+export interface Ingredient {
+	id: number,
+	name: string,
+	image: string,
+	price: number,
+}
+
+export interface Variation {
+	id: number,
+	price: number,
+	image: string,
+	pizza_size?: TPizzaSize,
+	pizza_type?: TPizzaType,
+	// count?: number,
+	// portion_size?: number,
+	// volume?: number,
+	// weight?: number,
+	// mass?: number,
+	ingredients: Ingredient[],
+}
+
+export interface ProductDetail {
+	id: number,
+	name: string,
+	description: string,
+	count: number,
+	category_id: number,
+	variations: Variation[],
 }
 
 /**
@@ -48,7 +79,7 @@ export const productApi = baseApi.injectEndpoints({
 		}),
 
 		// детальная информация о товаре
-		getDetailProduct: builder.query<Product, { product_id?: number}>({
+		getDetailProduct: builder.query<ProductDetail, { product_id?: number}>({
 			query: (query) => ({
 				url: `products/${query.product_id}`,
 				params: query,

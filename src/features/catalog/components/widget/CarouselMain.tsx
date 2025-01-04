@@ -1,10 +1,10 @@
 import React from 'react';
 import Autoplay from "embla-carousel-autoplay";
 
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../../../components/ui';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../../../../components/ui';
 
-import { cn } from '../../../lib';
-import { Container } from '../../../components/layout';
+import { cn } from '../../../../lib';
+import { Container } from '../../../../components/layout';
 
 
 interface Props {

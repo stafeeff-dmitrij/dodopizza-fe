@@ -10,7 +10,6 @@ export default {
 				md: '12px',
 				lg: '16px',
 				xl: '20px',
-				full: 'rounded-full',
   		},
   		colors: {
   			background: 'hsl(var(--background))',
