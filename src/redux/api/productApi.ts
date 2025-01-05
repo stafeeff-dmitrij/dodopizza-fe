@@ -1,13 +1,23 @@
 import { baseApi } from './baseApi.ts';
 import { TPizzaSize, TPizzaType } from '../../features/catalog/constants.ts';
 
-
+// главная страница
 export interface CategoryWithProduct {
 	id: number,
 	name: string,
 	products: Product[],
 }
 
+// товары конкретной категории
+export interface ProductWithPagination {
+	count: number,
+	total_pages: number,
+	next: string,
+	previous: string,
+	results: Product[],
+}
+
+// карточка товаров
 export interface Product {
 	id: number,
 	name: string,
@@ -18,41 +28,37 @@ export interface Product {
 	count: number,
 }
 
-export interface ProductWithPagination {
-	count: number,
-	total_pages: number,
-	next: string,
-	previous: string,
-	results: Product[],
-}
-
-export interface Ingredient {
+// дефолтные ингредиенты товара
+export interface IngredientProduct {
 	id: number,
 	name: string,
+}
+
+// ингредиенты вариации товара
+export interface IngredientVariation extends IngredientProduct {
 	image: string,
 	price: number,
 }
 
+// вариация товара
 export interface Variation {
 	id: number,
 	price: number,
 	image: string,
 	pizza_size?: TPizzaSize,
 	pizza_type?: TPizzaType,
-	// count?: number,
-	// portion_size?: number,
-	// volume?: number,
-	// weight?: number,
-	// mass?: number,
-	ingredients: Ingredient[],
+	mass?: number,
+	ingredients: IngredientVariation[],
 }
 
+// модалка и страница выбора товара
 export interface ProductDetail {
 	id: number,
 	name: string,
 	description: string,
 	count: number,
 	category_id: number,
+	default_ingredients: IngredientProduct[],
 	variations: Variation[],
 }
 
@@ -69,7 +75,7 @@ export const productApi = baseApi.injectEndpoints({
 			providesTags: ['all_products'],
 		}),
 
-		// товары определенной категории с возможностью фильтрации
+		// отфильтрованные товары определенной категории
 		getFilterProducts: builder.query<ProductWithPagination, { category_id?: string, page?: string }>({
 			query: (query) => ({
 				url: 'products/',

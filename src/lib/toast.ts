@@ -14,11 +14,11 @@ export function getNotReadyToast() {
 
 /**
  * @function
- * @description Вывод уведомления об ошибке получения данных с бэка
+ * @description Вывод уведомления об ошибке
  */
-export function getErrorDataToast() {
+export function getErrorDataToast(message: string) {
 	setTimeout(() => {
-		toast.error('Ошибка при получении данных', {
+		toast.error(message, {
 			duration: 3000,
 		});
 	}, 200);

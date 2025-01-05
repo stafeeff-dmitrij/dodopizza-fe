@@ -31,7 +31,7 @@ export function Category() {
 
 	React.useEffect(() => {
 		if (isError) {
-			getErrorDataToast();
+			getErrorDataToast('Ошибка при получении данных');
 		}
 	}, [isError]);
 

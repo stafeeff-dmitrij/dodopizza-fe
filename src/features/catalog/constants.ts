@@ -21,12 +21,6 @@ export enum PizzaType {
 	slim = 'slim',
 }
 
-// export enum mapPizzaSize {
-// 	25 = '25 см',
-// 	30 = '30 см',
-// 	35 = '35 см',
-// }
-
 export const mapPizzaSize = {
 	25: '25 см',
 	30: '30 см',

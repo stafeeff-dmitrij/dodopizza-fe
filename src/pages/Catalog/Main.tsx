@@ -20,7 +20,7 @@ export function Main() {
 
 	React.useEffect(() => {
 		if (isError) {
-			getErrorDataToast();
+			getErrorDataToast('Ошибка при получении данных');
 		}
 	}, [isError]);
 
