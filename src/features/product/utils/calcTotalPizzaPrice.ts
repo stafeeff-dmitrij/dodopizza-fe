@@ -1,4 +1,4 @@
-import { PizzaVariation } from '../../catalog/components/form/ChoicePizzaForm.tsx';
+import { PizzaVariation } from '../components/form/ChoicePizzaForm.tsx';
 
 
 /**

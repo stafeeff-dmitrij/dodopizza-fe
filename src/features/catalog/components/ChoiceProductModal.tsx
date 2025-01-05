@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../../components/ui';
-import { ProductForm } from './form';
+import { ProductForm } from '../../product/components';
 
 import { AppDispatch } from '../../../redux/store.ts';
 import { setDeActiveModal, selectActiveProduct } from '../../../redux/slices/productModalSlice.ts';

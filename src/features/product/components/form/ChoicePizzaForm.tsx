@@ -1,24 +1,13 @@
-import React, { useState } from 'react';
-import { useSet } from 'react-use';
+import React from 'react';
 
 import { cn, formatPrice, getErrorDataToast } from '../../../../lib';
 import { IngredientProduct, Variation } from '../../../../redux/api/productApi.ts';
 import { Title } from '../../../../components/typography';
-import { IngredientCard, PizzaImage, VariationsGroup } from '../../../product/components';
+import { IngredientCard, PizzaImage, VariationsGroup } from '../index.ts';
 import { Button } from '../../../../components/ui';
-import {
-	PizzaSize,
-	pizzaSizes,
-	PizzaType,
-	TPizzaSize,
-	TPizzaType
-} from '../../constants.ts';
-import {
-	calcTotalPizzaPrice,
-	getAvailablePizzaTypes,
-	getShortPizzaDescription,
-	getVariationPizza
-} from '../../../product/utils';
+import { pizzaSizes, TPizzaSize, TPizzaType } from '../../constants.ts';
+import { calcTotalPizzaPrice, getAvailablePizzaTypes, getShortPizzaDescription } from '../../utils';
+import { usePizzaOptions } from '../../hooks';
 
 
 export interface PizzaVariation extends Variation {
@@ -54,54 +43,23 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 	className
 }) => {
 
-	// у всех товаров есть, минимум, 1 вариация, у пицц всегда 5 вариаций
-	const [activeVariation, setActiveVariation] = useState<PizzaVariation>(variations.length > 1 ? variations[1] : variations[0]);
-
-	// размер и тип пиццы
-	const [size, setSize] = useState<TPizzaSize>(activeVariation.pizza_size);
-	const [type, setType] = useState<TPizzaType>(activeVariation.pizza_type);
-
-	// цена с учетом выбранной вариации и ингредиентов
-	const [totalPrice, setTotalPrice] = useState<number>(activeVariation.price);
-
-	// выбранные (уникальные) ингредиенты
-	const [selectedIngredientsId, {toggle: addIngredient}] = useSet(new Set<number>([]));
-
 	console.log('Ингредиентов по умолчанию: ', default_ingredients.length)
 
-	// установка активной вариации пиццы (по умолчанию 30 см, традиционная)
-	React.useEffect(() => {
-		const defaultVariation = getVariationPizza(variations, PizzaSize.average, PizzaType.traditional);
-		if (defaultVariation) {
-			setActiveVariation(defaultVariation);
-		}
-	}, [])
+	const {
+		size,
+		type,
+		activeVariation,
+		selectedIngredientsId,
+		setSize,
+		setType,
+		addIngredient,
+	} = usePizzaOptions(variations);
 
-	// смена активной вариации в зависимости от выбранных размеров и типа теста
-	React.useEffect(() => {
-		const activeVariation = getVariationPizza(variations, size, type);
-		if (activeVariation) {
-			setActiveVariation(activeVariation);
-		} else {
-			setActiveVariation(variations[0]);
-		}
-	}, [size, type])
-
-	// сброс выбранных размеров и типа теста, если при смене размера (вариации) нет допустимого типа теста
-	React.useEffect(() => {
-		setSize(activeVariation.pizza_size);
-		setType(activeVariation.pizza_type);
-	}, [activeVariation])
-
-	// подсчет общей стоимости пиццы с учетом выбранной вариации и ингредиентов
-	React.useEffect(() => {
-		const price = calcTotalPizzaPrice(activeVariation, selectedIngredientsId);
-		setTotalPrice(price);
-	}, [activeVariation, selectedIngredientsId])
-
+	// доступные вариации пицц по типу теста
 	const availableTypes = getAvailablePizzaTypes(variations, size);
-	const shortDescription = getShortPizzaDescription(activeVariation);
 
+	const shortDescription = getShortPizzaDescription(activeVariation);
+	const totalPrice = calcTotalPizzaPrice(activeVariation, selectedIngredientsId);
 
 	// добавление товара в корзину
 	const handleClickAdd = () => {

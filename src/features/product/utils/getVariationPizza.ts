@@ -1,5 +1,5 @@
-import { TPizzaSize, TPizzaType } from '../../catalog/constants.ts';
-import { PizzaVariation } from '../../catalog/components/form/ChoicePizzaForm.tsx';
+import { TPizzaSize, TPizzaType } from '../constants.ts';
+import { PizzaVariation } from '../components/form/ChoicePizzaForm.tsx';
 
 
 /**

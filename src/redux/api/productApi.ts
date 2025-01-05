@@ -1,5 +1,5 @@
 import { baseApi } from './baseApi.ts';
-import { TPizzaSize, TPizzaType } from '../../features/catalog/constants.ts';
+import { TPizzaSize, TPizzaType } from '../../features/product/constants.ts';
 
 // главная страница
 export interface CategoryWithProduct {

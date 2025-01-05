@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { cn } from '../../../../../lib';
-import { PizzaSize } from '../../../../catalog/constants.ts';
+import { PizzaSize } from '../../../constants.ts';
 
 interface Props {
 	imageUrl: string;

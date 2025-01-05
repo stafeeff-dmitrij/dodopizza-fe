@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { cn } from '../../../../lib';
-import { TPizzaSize, TPizzaType } from '../../../catalog/constants.ts';
+import { TPizzaSize, TPizzaType } from '../../constants.ts';
 
 
 export type Variant = {
