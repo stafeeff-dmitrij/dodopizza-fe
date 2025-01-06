@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { cn } from '../../../../../lib';
-import { PizzaSize } from '../../../constants.ts';
+import { PizzaSize, TPizzaSize } from '../../../constants.ts';
 
 interface Props {
 	imageUrl: string;
-	size: PizzaSize;
+	alt: string;
+	size: TPizzaSize;
 	className?: string;
 }
 
@@ -14,14 +15,16 @@ interface Props {
  * @description Изображение пиццы
  *
  * @prop {string} imageUrl - URL изображения
+ * @prop {string} alt - название изображения
+ * @prop {TPizzaSize} size - размер изображения
  * @prop {number} size - размер пиццы
  */
-export const PizzaImage: React.FC<Props> = ({ imageUrl, size, className }) => {
+export const PizzaImage: React.FC<Props> = ({ imageUrl, alt, size, className }) => {
 	return (
 		<div className={cn('relative flex items-center justify-center flex-1 w-full', className)}>
 			<img
 				src={imageUrl}
-				alt="Logo"
+				alt={alt}
 				className={cn('relative left-2 top-2 aspect-square transition-all z-10 duration-300', {
 					'w-[334px]': size === PizzaSize.small,
 					'w-[409px]': size === PizzaSize.average,

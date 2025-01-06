@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useGetDetailProductQuery } from '../../../../redux/api/productApi.ts';
+import { useGetDetailProductQuery, Variation } from '../../../../redux/api/productApi.ts';
 import { ChoicePizzaForm, PizzaVariation } from './ChoicePizzaForm.tsx';
 import { ChoiceProductForm } from './ChoiceProductForm.tsx';
 import { CategoriesId } from '../../constants.ts';
+import { getErrorToast, getSuccessToast } from '../../../../lib';
+import { useNavigate } from 'react-router-dom';
 
-
-// type FormSize = 'small' | 'average' | 'big';
 
 interface Props {
 	productId: number;
@@ -22,30 +22,56 @@ interface Props {
  */
 export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 
-	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: productId });
+	const navigate = useNavigate();
+
+	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: productId });
+
+	// добавление товара в корзину
+	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
+		try {
+			getSuccessToast(
+				`Товар: ${data?.name} 
+			   id вариации: ${variationId} 
+			   id ингредиентов: ${ingredientsId && ingredientsId.length > 0 ? ingredientsId : '-'}`
+			);
+			closeModal?.();
+		} catch (err) {
+			getErrorToast('Не удалось добавить товар в корзину');
+			console.error(err);
+		}
+	};
 
 	if (isError) {
-		return <p>Ошибка!</p>;
+		navigate('/');
+		getErrorToast('Произошла ошибка!');
+		console.error(error);
 	}
-
-	// TODO Размеры для всех типов форм
-	// const mapFormSize = {
-	// 	small: 'w-[740px] h-[420px]',
-	// 	average: 'w-[920px] h-[610px]',
-	// 	big: 'w-[980px] h-[768px]',
-	// } as const;
 
 	if (isSuccess) {
 		if (data.category_id === CategoriesId.pizzas) {
 			return <ChoicePizzaForm
 				name={data.name}
 				description={data.description}
+				count={data.count}
 				variations={data.variations as PizzaVariation[]}
 				default_ingredients={data.default_ingredients}
+				onSubmit={onSubmit}
 				loading={isLoading}
 			/>
+		} else if (data.category_id === CategoriesId.combo) {
+			return <p>Форма для комбо товаров еще не готова</p>
 		} else {
-			return <ChoiceProductForm loading={isLoading}/>
+			return <ChoiceProductForm
+				// средний размер формы, если хотя бы в одной вариации товара есть ингредиенты, иначе маленький
+				size={data.variations.some(variation => variation.ingredients.length > 0) ? 'medium' : 'small'}
+				categoryId={data.category_id}
+				name={data.name}
+				description={data.description}
+				count={data.count}
+				variations={data.variations as Variation[]}
+				onSubmit={onSubmit}
+				loading={isLoading}
+			/>
 		}
 	}
 };

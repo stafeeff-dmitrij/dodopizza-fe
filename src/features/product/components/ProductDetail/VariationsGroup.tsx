@@ -1,18 +1,18 @@
 import React from 'react';
 
 import { cn } from '../../../../lib';
-import { TPizzaSize, TPizzaType } from '../../constants.ts';
+import { TProductValue } from '../../constants.ts';
 
 
 export type Variant = {
 	name: string;
-	value: string;
+	value: TProductValue;
 	disabled?: boolean;
 };
 
 interface Props {
 	variants: Variant[];
-	value: TPizzaSize | TPizzaType;
+	value: TProductValue;
 	onClick?: (value: Variant['value']) => void;  // смена типа вариации
 	className?: string;
 }

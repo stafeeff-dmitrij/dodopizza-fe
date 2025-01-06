@@ -1,13 +1,19 @@
 import React from 'react';
 
-import { cn, formatPrice, getErrorDataToast } from '../../../../lib';
+import { cn, formatPrice } from '../../../../lib';
 import { IngredientProduct, Variation } from '../../../../redux/api/productApi.ts';
 import { Title } from '../../../../components/typography';
 import { IngredientCard, PizzaImage, VariationsGroup } from '../index.ts';
 import { Button } from '../../../../components/ui';
 import { pizzaSizes, TPizzaSize, TPizzaType } from '../../constants.ts';
-import { calcTotalPizzaPrice, getAvailablePizzaTypes, getShortPizzaDescription } from '../../utils';
+import {
+	calcTotalPizzaPrice,
+	getAvailablePizzaTypes,
+	getCurrentIngredients,
+	getShortDescriptionPizza
+} from '../../utils';
 import { usePizzaOptions } from '../../hooks';
+import { Variant } from '../ProductDetail/VariationsGroup.tsx';
 
 
 export interface PizzaVariation extends Variation {
@@ -19,8 +25,10 @@ export interface PizzaVariation extends Variation {
 export interface Props {
 	name: string,
 	description: string,
+	count: number
 	default_ingredients: IngredientProduct[],
 	variations: PizzaVariation[],
+	onSubmit: (variationId: number, ingredientsId: number[]) => void;
 	loading: boolean;
 	className?: string;
 }
@@ -29,16 +37,21 @@ export interface Props {
  * @component
  * @description Форма выбора пиццы
  *
- * @prop {string} name - наименование товара
- * @prop {string} description - описание товара
- * @prop {IngredientProduct[]} default_ingredients - ингредиенты по умолчанию, доступные для данного товара
- * @prop {boolean} loading - статус загрузки
+ * @prop name - наименование товара
+ * @prop description - описание товара
+ * @prop count - кол-во товара
+ * @prop default_ingredients - ингредиенты по умолчанию, доступные для данного товара
+ * @prop variations - вариации товара
+ * @prop onSubmit - добавление товара в корзину
+ * @prop loading - статус загрузки
  */
 export const ChoicePizzaForm: React.FC<Props> = ({
 	name,
 	description,
+	count,
 	variations,
   default_ingredients,
+  onSubmit,
 	loading,
 	className
 }) => {
@@ -57,27 +70,30 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 
 	// доступные вариации пицц по типу теста
 	const availableTypes = getAvailablePizzaTypes(variations, size);
-
-	const shortDescription = getShortPizzaDescription(activeVariation);
+	// описание товара в зависимости от выбранной вариации
+	const shortDescription = getShortDescriptionPizza(activeVariation);
+	// цена с учетом выбранной вариации и ингредиентов
 	const totalPrice = calcTotalPizzaPrice(activeVariation, selectedIngredientsId);
 
 	// добавление товара в корзину
 	const handleClickAdd = () => {
-		getErrorDataToast('Функционал добавления товара в корзину еше не реализован!');
+		// выбранные ингредиенты текущей активной вариации
+		const ingredientsId = getCurrentIngredients(activeVariation.ingredients, selectedIngredientsId);
+		onSubmit(activeVariation.id, ingredientsId);
 	};
 
 	return (
 		<div className={cn('flex flex-1 w-[920px] h-[610px]', className)}>
-			<PizzaImage className='w-[520px]' imageUrl={activeVariation.image} size={activeVariation.pizza_size}/>
-			<div className='flex flex-col pt-[30px] bg-[#fcfcfc]'>
+			<PizzaImage className='w-[520px]' imageUrl={activeVariation.image} alt={name} size={activeVariation.pizza_size}/>
+			<div className='flex flex-col justify-between pt-[30px] bg-[#fcfcfc]'>
 				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
-				<div className="w-[400px] h-[480px] px-[30px]  overflow-auto">
+				<div className="w-[400px] px-[30px] overflow-auto">
 					<Title text={name} size="xl" className="font-normal text-[24px]"/>
-					<p className="pt-[1px] pb-[5px] text-[14px] text-[#828282]">{shortDescription}</p>
+					<p className="pt-[1px] pb-[5px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
 					<p className="mb-3 text-[14px] leading-[18px] text-black">{description}</p>
 					<div className="flex flex-col gap-[6px] pb-4">
 						<VariationsGroup
-							variants={pizzaSizes}
+							variants={pizzaSizes as Variant[]}
 							value={size}
 							onClick={value => setSize(Number(value) as TPizzaSize)}
 						/>
@@ -105,6 +121,9 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 				</div>
 				<div className="px-[30px] pt-[24px] pb-[30px]">
 					<Button
+						variant={count === 0 ? 'block' : 'default'}
+						disabled={count === 0}
+						title={count === 0 ? 'Товар закончился' : ''}
 						loading={loading}
 						onClick={handleClickAdd}
 						className="px-9 py-6 text-base font-light w-full"

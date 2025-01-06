@@ -10,7 +10,7 @@ import { ChooseProductModal, ProductsList } from '../../features/catalog/compone
 import { AppDispatch } from '../../redux/store.ts';
 import { selectCategory, setActiveId } from '../../redux/slices/categorySlice.ts';
 import { useGetFilterProductsQuery } from '../../redux/api';
-import { getErrorDataToast } from '../../lib';
+import { getErrorToast } from '../../lib';
 
 
 /**
@@ -31,7 +31,7 @@ export function Category() {
 
 	React.useEffect(() => {
 		if (isError) {
-			getErrorDataToast('Ошибка при получении данных');
+			getErrorToast('Ошибка при получении данных');
 		}
 	}, [isError]);
 

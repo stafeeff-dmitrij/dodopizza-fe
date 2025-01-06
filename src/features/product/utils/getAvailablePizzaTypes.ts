@@ -1,5 +1,5 @@
 import { PizzaVariation } from '../components/form/ChoicePizzaForm.tsx';
-import { pizzaTypes, TPizzaSize } from '../constants.ts';
+import { pizzaTypes, TPizzaSize, TPizzaType } from '../constants.ts';
 import { Variant } from '../components/ProductDetail/VariationsGroup.tsx';
 
 
@@ -18,7 +18,7 @@ export const getAvailablePizzaTypes = (variations: PizzaVariation[], selectSize:
 
 	return pizzaTypes.map(item => ({
 		name: item.name,
-		value: item.value,
+		value: item.value as TPizzaType,
 		disabled: !filteredVariationBySize.some(variation => variation.pizza_type === item.value),
 	}));
 

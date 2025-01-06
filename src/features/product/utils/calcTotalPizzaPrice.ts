@@ -1,4 +1,5 @@
 import { PizzaVariation } from '../components/form/ChoicePizzaForm.tsx';
+import { Variation } from '../../../redux/api/productApi.ts';
 
 
 /**
@@ -10,7 +11,7 @@ import { PizzaVariation } from '../components/form/ChoicePizzaForm.tsx';
  * @returns number общая стоимость
  */
 export const calcTotalPizzaPrice = (
-	variation: PizzaVariation,
+	variation: PizzaVariation | Variation,
 	selectedIngredientsId: Set<number>,
 ) => {
 

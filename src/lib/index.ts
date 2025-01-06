@@ -1,2 +1,2 @@
 export { cn, getEnvVariables, formatPrice } from './utils.ts';
-export { getNotReadyToast, getErrorDataToast, getSuccessToast } from './toast.ts';
+export { getNotReadyToast, getErrorToast, getSuccessToast } from './toast.ts';

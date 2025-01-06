@@ -1,5 +1,11 @@
 import { baseApi } from './baseApi.ts';
-import { TPizzaSize, TPizzaType } from '../../features/product/constants.ts';
+import {
+	TPizzaSize,
+	TPizzaType,
+	TPortionSize,
+	TProductCount,
+	TProductVolume, TWeightValue
+} from '../../features/product/constants.ts';
 
 // главная страница
 export interface CategoryWithProduct {
@@ -47,6 +53,10 @@ export interface Variation {
 	image: string,
 	pizza_size?: TPizzaSize,
 	pizza_type?: TPizzaType,
+	count?: TProductCount,
+	portion_size?: TPortionSize,
+	volume?: TProductVolume,
+	weight?: TWeightValue,
 	mass?: number,
 	ingredients: IngredientVariation[],
 }

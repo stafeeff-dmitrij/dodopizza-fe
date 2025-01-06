@@ -16,7 +16,7 @@ export function getNotReadyToast() {
  * @function
  * @description Вывод уведомления об ошибке
  */
-export function getErrorDataToast(message: string) {
+export function getErrorToast(message: string) {
 	setTimeout(() => {
 		toast.error(message, {
 			duration: 3000,

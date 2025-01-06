@@ -5,7 +5,7 @@ import { Container } from '../../components/layout';
 import { CarouselMain, ChooseProductModal, ProductsGroupList } from '../../features/catalog/components';
 
 import { useGetAllProductsQuery } from '../../redux/api';
-import { getErrorDataToast } from '../../lib';
+import { getErrorToast } from '../../lib';
 
 
 /**
@@ -20,7 +20,7 @@ export function Main() {
 
 	React.useEffect(() => {
 		if (isError) {
-			getErrorDataToast('Ошибка при получении данных');
+			getErrorToast('Ошибка при получении данных');
 		}
 	}, [isError]);
 
