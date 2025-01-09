@@ -1,4 +1,11 @@
-import { CategoriesId, mapPizzaSize, mapPizzaType } from '../constants.ts';
+import {
+	CategoriesId,
+	mapPizzaSize,
+	mapPizzaType,
+	mapPortionSize,
+	mapProductCount,
+	mapProductVolume, mapWeightValue
+} from '../constants.ts';
 import { PizzaVariation } from '../components/form/ChoicePizzaForm.tsx';
 import { Variation } from '../../../redux/api/productApi.ts';
 
@@ -37,28 +44,28 @@ export const getShortDescriptionProduct = (categoryId: number, variation: Variat
 		case CategoriesId.desserts:
 		case CategoriesId.sauces:
 			if (variation.count) {
-				description = `${[variation.count]} шт`;
+				description = `${mapProductCount[variation.count]}`;
 			}
 			if (variation.portion_size) {
-				description = `${[variation.portion_size]}`;
+				description = `${mapPortionSize[variation.portion_size]}`;
 			}
 			break;
 		case CategoriesId.cocktails:
 		case CategoriesId.coffee:
 		case CategoriesId.drinks:
 			if (variation.volume) {
-				description = `${variation.volume} л`;
+				description = `${mapProductVolume[variation.volume]}`;
 			}
 			if (variation.count) {
-				description = `${[variation.count]} шт`;
+				description = `${mapProductCount[variation.count]}`;
 			}
 			break;
 		case CategoriesId.other:
 			if (variation.count) {
-				description = `${[variation.count]} шт`;
+				description = `${mapProductCount[variation.count]}т`;
 			}
 			if (variation.weight) {
-				description = `${[variation.weight]} кг`;
+				description = `${mapWeightValue[variation.weight]}`;
 			}
 			break;
 	}

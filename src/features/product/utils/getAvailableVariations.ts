@@ -1,4 +1,4 @@
-import { CategoriesId, mapProductCount, mapProductVolume } from '../constants.ts';
+import { CategoriesId, mapPortionSize, mapProductCount, mapProductVolume, mapWeightValue } from '../constants.ts';
 import { Variation } from '../../../redux/api/productApi.ts';
 import { Variant } from '../components/ProductDetail/Variation.tsx';
 
@@ -13,43 +13,6 @@ import { Variant } from '../components/ProductDetail/Variation.tsx';
  */
 export const getAvailableVariations = (categoryId: number, variations: Variation[]): Variant[] => {
 
-	// switch (categoryId) {
-		// case CategoriesId.pizzas:
-		// 	if (variation.pizza_size && variation.pizza_type) {
-		// 		description = `${mapPizzaSize[variation.pizza_size]}, ${mapPizzaType[variation.pizza_type].toLowerCase()} тесто`;
-		// 	}
-		// 	break;
-		// case CategoriesId.snacks:
-		// case CategoriesId.breakfasts:
-		// case CategoriesId.desserts:
-		// case CategoriesId.sauces:
-		// 	if (variation.count) {
-		// 		description = `${[variation.count]} шт`;
-		// 	}
-		// 	if (variation.portion_size) {
-		// 		description = `${[variation.portion_size]}`;
-		// 	}
-		// 	break;
-		// case CategoriesId.cocktails:
-		// case CategoriesId.coffee:
-		// case CategoriesId.drinks:
-		// 	if (variation.volume) {
-		// 		`${variation.volume} л`;
-		// 	}
-		// 	if (variation.count) {
-		// 		description = `${[variation.count]} шт`;
-		// 	}
-		// 	break;
-		// case CategoriesId.other:
-		// 	if (variation.count) {
-		// 		description = `${[variation.count]} шт`;
-		// 	}
-		// 	if (variation.weight) {
-		// 		description = `${[variation.weight]} кг`;
-		// 	}
-		// 	break;
-	// }
-
 	const variants = variations.map(variation => {
 		switch (categoryId) {
 			case CategoriesId.snacks:
@@ -62,12 +25,12 @@ export const getAvailableVariations = (categoryId: number, variations: Variation
 						value: variation.count,
 					}
 				}
-				// if (variation.portion_size) {
-				// 	return {
-				// 		name: mapProductCount[variation.portion_size],
-				// 		value: variation.portion_size,
-				// 	}
-				// }
+				if (variation.portion_size) {
+					return {
+						name: mapPortionSize[variation.portion_size],
+						value: variation.portion_size,
+					}
+				}
 				break;
 			case CategoriesId.cocktails:
 			case CategoriesId.coffee:
@@ -82,6 +45,20 @@ export const getAvailableVariations = (categoryId: number, variations: Variation
 					return {
 						name: mapProductCount[variation.count],
 						value: variation.count,
+					}
+				}
+				break;
+			case CategoriesId.other:
+				if (variation.count) {
+					return {
+						name: mapProductCount[variation.count],
+						value: variation.count,
+					}
+				}
+				if (variation.weight) {
+					return {
+						name: mapWeightValue[variation.weight],
+						value: variation.weight,
 					}
 				}
 				break;

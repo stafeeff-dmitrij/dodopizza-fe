@@ -90,7 +90,7 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 				<div className="w-[400px] px-[30px] overflow-auto">
 					<Title text={name} size="xl" className="font-normal text-[24px]"/>
 					<p className="pt-[1px] pb-[5px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
-					<p className="mb-3 text-[14px] leading-[18px] text-black">{description}</p>
+					<p className="mb-3 text-[14px] leading-[18px] text-black text-justify">{description}</p>
 					<div className="flex flex-col gap-[6px] pb-4">
 						<VariationsGroup
 							variants={pizzaSizes as Variant[]}

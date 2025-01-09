@@ -17,9 +17,10 @@ export const getVariationProduct = (
 ) => {
 
 	return variations.find(variation => {
-
 		switch (categoryId) {
 			case CategoriesId.snacks:
+			case CategoriesId.breakfasts:
+			case CategoriesId.desserts:
 				if (variation.count && variation.count === value) {
 					return variation;
 				}

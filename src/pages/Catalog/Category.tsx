@@ -44,7 +44,7 @@ export function Category() {
 		<div>
 			<Container className="flex justify-between gap-x-7 pt-4">
 				<div
-					className="flex flex-col min-w-[240px] max-h-[550px] top-20 sticky rounded-[8px] shadow-[0px_6px_20px_rgba(6,5,50,0.1)] p-4"
+					className="flex flex-col w-[280px] max-h-[550px] top-20 sticky rounded-[8px] shadow-[0px_6px_20px_rgba(6,5,50,0.1)] p-4"
 				>
 					Блок с фильтрами
 				</div>
@@ -54,7 +54,7 @@ export function Category() {
 						<div className="flex px-6 py-2 rounded-[8px] shadow-[0px_6px_20px_rgba(6,5,50,0.1)]">Блок сортировки</div>
 					</div>
 					{isLoading && <p>Идет загрузка...</p>}
-					{isSuccess && <ProductsList products={data.results} className="grid-cols-3 gap-x-5"/>}
+					{isSuccess && <ProductsList products={data.results} className="grid-cols-3 gap-x-6"/>}
 				</div>
 			</Container>
 			<ChooseProductModal/>

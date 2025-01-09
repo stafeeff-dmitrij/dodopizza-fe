@@ -65,7 +65,7 @@ export const mapProductVolume = {
 
 // вес рассыпного товара
 export const mapWeightValue = {
-	0.5: '0.5 л',
+	0.5: '0.5 кг',
 } as const;
 
 export const pizzaSizes = Object.entries(mapPizzaSize).map(([value, name]) => ({

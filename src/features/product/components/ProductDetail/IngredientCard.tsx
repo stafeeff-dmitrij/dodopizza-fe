@@ -44,7 +44,10 @@ export const IngredientCard: React.FC<Props> = ({
 			<div className="flex flex-col items-center">
 				{active && <CircleCheck className="absolute top-2 right-2 text-primary" />}
 				<img className='mb-1' width={88} height={88} src={image} alt={name} />
-				<span className="w-[90%] text-xs font-normal mb-1">{name}</span>
+				<span
+					className="w-[90%] text-xs font-normal mb-1"
+					title={name}
+				>{name.length > 25 ? `${name.slice(0,25)}...` : name}</span>
 			</div>
 			<span className="text-base font-normal">{price} ₽</span>
 		</div>

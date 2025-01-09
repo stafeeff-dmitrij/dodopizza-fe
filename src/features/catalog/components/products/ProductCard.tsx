@@ -38,7 +38,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 
 	return (
 		<div
-			className={cn('flex flex-col justify-between min-w-[233px] cursor-pointer', className)}
+			className={cn('flex flex-col justify-between w-[233px] cursor-pointer', className)}
 			onClick={() => onOpenModalClick()}
 		>
 			<div className="flex flex-col">
