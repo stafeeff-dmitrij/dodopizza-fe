@@ -12,10 +12,12 @@ import {
 } from '../../utils';
 import { useProductOptions } from '../../hooks';
 import { TProductValue } from '../../constants.ts';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../../redux/store.ts';
+import { setActiveCategoryId } from '../../../../redux/slices/categorySlice.ts';
 
 
 export interface Props {
-	size: 'small' | 'medium' | 'large';
 	categoryId: number,
 	name: string,
 	description: string,
@@ -30,7 +32,6 @@ export interface Props {
  * @component
  * @description Форма выбора товара
  *
- * @prop size - размер формы
  * @prop categoryId - id категории товара
  * @prop name - наименование товара
  * @prop description - описание товара
@@ -39,8 +40,7 @@ export interface Props {
  * @prop onSubmit - добавление товара в корзину
  * @prop loading - статус загрузки
  */
-export const ChoiceProductForm: React.FC<Props> = ({
-	size = 'small',
+export const ChoiceProductPage: React.FC<Props> = ({
 	categoryId,
 	name,
 	description,
@@ -50,6 +50,9 @@ export const ChoiceProductForm: React.FC<Props> = ({
 	loading,
 	className
 }) => {
+
+	const dispatch = useDispatch<AppDispatch>();
+	dispatch(setActiveCategoryId(categoryId));
 
 	const {
 		value,
@@ -74,30 +77,23 @@ export const ChoiceProductForm: React.FC<Props> = ({
 
 	return (
 		<div className={cn(
-			'flex flex-1',
-			{'w-[740px] h-[420px]': size === 'small'},
-			{'w-[920px] h-[610px]': size === 'medium'},
+			'flex flex-1 w-full h-[420px] gap-x-6',
+			{'h-[700px]': variations.some(variation => variation.ingredients.length > 0)},
 			className
 		)}>
 			<ProductImage
-				className={cn(
-					{'w-[52%]': size === 'small'},
-					{'w-[57%]': size === 'medium'},
-				)}
+				className='bg-[#fffcf8] rounded-3xl'
 				imageUrl={activeVariation.image}
 				bigImage={variations.length === 1 && activeVariation.id === variations[0].id || variations.length > 1 && activeVariation != variations[0]}
+				smaller={true}
 				alt={name}
 			/>
-			<div className={cn(
-				'flex flex-col justify-between pt-[30px] bg-[#fcfcfc]',
-				{'w-[48%]': size === 'small'},
-				{'w-[43%]': size === 'medium'},
-			)}>
+			<div className='flex flex-col justify-between pt-[30px]'>
 				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
-				<div className="w-full px-[30px] overflow-auto">
+				<div className="w-[410px] px-[30px] overflow-auto">
 					<Title text={name} size="xl" className="mb-1 font-normal text-[24px]"/>
-					<p className="mb-[5px] pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
-					<p className="mb-3 text-[14px] leading-[18px] text-black text-justify">{description}</p>
+					<p className="mb-2 pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
+					<p className="mb-5 text-[14px] leading-[18px] text-black text-justify">{description}</p>
 					<div className="flex flex-col gap-[6px] pb-4">
 						{variations.length > 1
 							?

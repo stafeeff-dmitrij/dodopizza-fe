@@ -48,6 +48,12 @@ export const usePizzaOptions = (variations: PizzaVariation[]): ReturnProps => {
 		setType(activeVariation.pizza_type);
 	}, [activeVariation])
 
+	// смена активной вариации товара при новых вариациях
+	// не удалять, иначе баг при смене страницы товара через поиск
+	React.useEffect(() => {
+		setActiveVariation(variations.length > 1 ? variations[1] : variations[0]);
+	}, [variations])
+
 	return {
 		size,
 		type,

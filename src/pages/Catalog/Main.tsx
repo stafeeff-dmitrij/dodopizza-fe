@@ -2,7 +2,7 @@ import React from 'react';
 import { useTitle } from 'react-use';
 
 import { Container } from '../../components/layout';
-import { CarouselMain, ChooseProductModal, ProductsGroupList } from '../../features/catalog/components';
+import { CarouselMain, ProductsGroupList } from '../../features/catalog/components';
 
 import { useGetAllProductsQuery } from '../../redux/api';
 import { getErrorToast } from '../../lib';
@@ -44,7 +44,6 @@ export function Main() {
 					</div>
 				</div>
 			</Container>
-			<ChooseProductModal/>
 		</div>
 	);
 }

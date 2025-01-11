@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../../components/ui';
-import { ProductForm } from '../../product/components';
+import { ProductForm } from './form';
 
 import { AppDispatch } from '../../../redux/store.ts';
 import { setDeActiveModal, selectActiveProduct } from '../../../redux/slices/productModalSlice.ts';
@@ -19,7 +19,7 @@ interface Props {
  * @component
  * @description Модальное окно выбора и добавления товара в корзину
  */
-export const ChooseProductModal: React.FC<Props> = ({ className }) => {
+export const ProductModal: React.FC<Props> = ({ className }) => {
 
 	const navigate = useNavigate();
 

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Title } from '../../components/typography';
 import { Container } from '../../components/layout';
-import { ChooseProductModal, ProductsList } from '../../features/catalog/components';
+import { ProductsList } from '../../features/catalog/components';
 
 import { AppDispatch } from '../../redux/store.ts';
-import { selectCategory, setActiveId } from '../../redux/slices/categorySlice.ts';
+import { selectCategory, setActiveCategoryId } from '../../redux/slices/categorySlice.ts';
 import { useGetFilterProductsQuery } from '../../redux/api';
 import { getErrorToast } from '../../lib';
 
@@ -37,7 +37,7 @@ export function Category() {
 
 	// установка активной категории
 	React.useEffect(() => {
-		id && dispatch(setActiveId(Number(id)));
+		id && dispatch(setActiveCategoryId(Number(id)));
 	}, [id]);
 
 	return (
@@ -57,7 +57,6 @@ export function Category() {
 					{isSuccess && <ProductsList products={data.results} className="grid-cols-3 gap-x-6"/>}
 				</div>
 			</Container>
-			<ChooseProductModal/>
 		</div>
 	);
 }

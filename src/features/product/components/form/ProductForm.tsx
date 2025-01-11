@@ -4,8 +4,9 @@ import { useGetDetailProductQuery, Variation } from '../../../../redux/api/produ
 import { ChoicePizzaForm, PizzaVariation } from './ChoicePizzaForm.tsx';
 import { ChoiceProductForm } from './ChoiceProductForm.tsx';
 import { CategoriesId } from '../../constants.ts';
-import { getErrorToast, getSuccessToast } from '../../../../lib';
+import { getErrorToast } from '../../../../lib';
 import { useNavigate } from 'react-router-dom';
+import { addProductToCart } from '../../utils';
 
 
 interface Props {
@@ -28,22 +29,13 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 
 	// добавление товара в корзину
 	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
-		try {
-			getSuccessToast(
-				`Товар: ${data?.name} 
-			   id вариации: ${variationId} 
-			   id ингредиентов: ${ingredientsId && ingredientsId.length > 0 ? ingredientsId : '-'}`
-			);
-			closeModal?.();
-		} catch (err) {
-			getErrorToast('Не удалось добавить товар в корзину');
-			console.error(err);
-		}
+		await addProductToCart(data!, variationId, ingredientsId);
+		closeModal?.();
 	};
 
 	if (isError) {
 		navigate('/');
-		getErrorToast('Произошла ошибка!');
+		getErrorToast('Произошла ошибка при получении данных о товаре');
 		console.error(error);
 	}
 

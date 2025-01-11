@@ -21,7 +21,7 @@ export const categorySlice = createSlice({
 	initialState,
 	reducers: {
 		// установка активной категории
-		setActiveId: (state, action: PayloadAction<number>) => {
+		setActiveCategoryId: (state, action: PayloadAction<number>) => {
 			state.activeId = action.payload;
 		},
 		// сохранение категорий
@@ -34,5 +34,5 @@ export const categorySlice = createSlice({
 
 export const selectCategory = (state: RootState) => state.category;
 
-export const { setActiveId, setCategories } = categorySlice.actions;
+export const { setActiveCategoryId, setCategories } = categorySlice.actions;
 export default categorySlice.reducer;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useIntersection } from 'react-use';
 
 import { AppDispatch } from '../../../../redux/store.ts';
-import { setActiveId } from '../../../../redux/slices/categorySlice.ts';
+import { setActiveCategoryId } from '../../../../redux/slices/categorySlice.ts';
 import { Title } from '../../../../components/typography';
 import { ProductsList } from './ProductsList.tsx';
 import { Product } from '../../../../redux/api/productApi.ts';
@@ -32,7 +32,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 	className,
 }) => {
 
-	const dispatch = useDispatch<AppDispatch>()
+	const dispatch = useDispatch<AppDispatch>();
 
 	const crossRef = React.useRef<HTMLDivElement>(null);
 
@@ -46,7 +46,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 	React.useEffect(() => {
 		// если intersection в зоне видимости экрана
 		if (cross?.isIntersecting) {
-			dispatch(setActiveId(categoryId));
+			dispatch(setActiveCategoryId(categoryId));
 		}
 	}, [categoryId, cross?.isIntersecting, title]);
 

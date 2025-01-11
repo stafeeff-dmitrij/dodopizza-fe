@@ -7,7 +7,8 @@ import { Button } from '../../../../components/ui';
 import { AppDispatch } from '../../../../redux/store.ts';
 import { Product } from '../../../../redux/api/productApi.ts';
 import { setActiveModal } from '../../../../redux/slices/productModalSlice.ts';
-import { cn, getErrorToast } from '../../../../lib';
+import { cn } from '../../../../lib';
+import { addProductToCart } from '../../../product/utils';
 
 
 interface Props {
@@ -31,9 +32,9 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 	}
 
 	// добавление товара в корзину
-	const onAddProductToCartClick = (even: React.MouseEvent<HTMLButtonElement>) => {
+	const onAddProductToCartClick = async (even: React.MouseEvent<HTMLButtonElement>) => {
 		even.stopPropagation();  // останавливаем открытие модального окна
-		getErrorToast('Добавление товара в корзину еще не реализовано!');
+		await addProductToCart(product);
 	}
 
 	return (

@@ -14,6 +14,9 @@ import {
 } from '../../utils';
 import { usePizzaOptions } from '../../hooks';
 import { Variant } from '../ProductDetail/VariationsGroup.tsx';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../../redux/store.ts';
+import { setActiveCategoryId } from '../../../../redux/slices/categorySlice.ts';
 
 
 export interface PizzaVariation extends Variation {
@@ -23,6 +26,7 @@ export interface PizzaVariation extends Variation {
 }
 
 export interface Props {
+	categoryId: number;
 	name: string,
 	description: string,
 	count: number
@@ -35,8 +39,9 @@ export interface Props {
 
 /**
  * @component
- * @description Форма выбора пиццы
+ * @description Страница выбора пиццы
  *
+ * @prop categoryId - id категории товара
  * @prop name - наименование товара
  * @prop description - описание товара
  * @prop count - кол-во товара
@@ -45,7 +50,8 @@ export interface Props {
  * @prop onSubmit - добавление товара в корзину
  * @prop loading - статус загрузки
  */
-export const ChoicePizzaForm: React.FC<Props> = ({
+export const ChoicePizzaPage: React.FC<Props> = ({
+	categoryId,
 	name,
 	description,
 	count,
@@ -56,7 +62,10 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 	className
 }) => {
 
-	console.log('Ингредиентов по умолчанию: ', default_ingredients.length)
+	console.log('Кол-во ингредиентов: ', default_ingredients.length)
+
+	const dispatch = useDispatch<AppDispatch>();
+	dispatch(setActiveCategoryId(categoryId));
 
 	const {
 		size,
@@ -83,15 +92,15 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 	};
 
 	return (
-		<div className={cn('flex flex-1 w-full h-[610px]', className)}>
-			<PizzaImage className='w-[520px]' imageUrl={activeVariation.image} alt={name} size={activeVariation.pizza_size}/>
-			<div className='flex flex-col justify-between pt-[30px] bg-[#fcfcfc]'>
+		<div className={cn('flex flex-1 w-full h-[700px] gap-x-6', className)}>
+			<PizzaImage className='w-[520px] bg-[#fffcf8] rounded-3xl' imageUrl={activeVariation.image} alt={name} size={activeVariation.pizza_size}/>
+			<div className='flex flex-col justify-between pt-5 rounded-[20px]'>
 				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
-				<div className="w-[400px] px-[30px] overflow-auto">
+				<div className="w-[410px] px-[30px] overflow-auto">
 					<Title text={name} size="xl" className="mb-1 font-normal text-[24px]"/>
-					<p className="mb-[5px] pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
-					<p className="mb-3 text-[14px] leading-[18px] text-black text-justify">{description}</p>
-					<div className="flex flex-col gap-[6px] pb-4">
+					<p className="mb-2 pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
+					<p className="mb-5 text-[14px] leading-[18px] text-black text-justify">{description}</p>
+					<div className="flex flex-col gap-[6px] pb-6">
 						<VariationsGroup
 							variants={pizzaSizes as Variant[]}
 							value={size}
@@ -104,7 +113,7 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 						/>
 					</div>
 					<Title text="Добавить по вкусу" size="sm" className="mb-2.5"/>
-					<div className="grid grid-cols-3 gap-2 pb-[30px]">
+					<div className="grid grid-cols-3 gap-3 pb-[30px]">
 						{activeVariation.ingredients.map((ingredient) => (
 							<IngredientCard
 								key={ingredient.id}

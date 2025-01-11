@@ -6,3 +6,4 @@ export { getAvailableVariations } from './getAvailableVariations.ts';
 export { getValueVariation } from './getValueVariation.ts';
 export { getCurrentIngredients } from './getCurrentIngredients.ts';
 export { calcTotalPizzaPrice } from './calcTotalPizzaPrice.ts';
+export { addProductToCart } from './addProductToCart.ts';

@@ -39,6 +39,12 @@ export const useProductOptions = (categoryId: number, variations: Variation[]): 
 		}
 	}, [value])
 
+	// смена активной вариации товара при новых вариациях
+	// не удалять, иначе баг при смене страницы товара через поиск
+	React.useEffect(() => {
+		setActiveVariation(variations[0]);
+	}, [variations])
+
 	return {
 		value,
 		activeVariation,

@@ -1,8 +1,12 @@
 import { useParams } from 'react-router-dom';
 
-import { Title } from '../../components/typography';
 import { Container } from '../../components/layout';
-import { useGetDetailProductQuery } from '../../redux/api/productApi.ts';
+import { useGetDetailProductQuery, Variation } from '../../redux/api/productApi.ts';
+import { getErrorToast } from '../../lib';
+import { CategoriesId } from '../../features/product/constants.ts';
+import { PizzaVariation } from '../../features/product/components/form/ChoicePizzaForm.tsx';
+import { addProductToCart } from '../../features/product/utils';
+import { ChoicePizzaPage, ChoiceProductPage } from '../../features/product/components/page';
 
 
 /**
@@ -12,23 +16,48 @@ import { useGetDetailProductQuery } from '../../redux/api/productApi.ts';
 export function Product() {
 
 	const { id } = useParams();
-	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: Number(id) });
+	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: Number(id) });
 
-	if (isLoading) {
-		return <p>Загрузка...</p>;
-	}
+	// добавление товара в корзину
+	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
+		await addProductToCart(data!, variationId, ingredientsId);
+	};
 
 	if (isError) {
-		return <p>Ошибка!</p>;
+		getErrorToast('Произошла ошибка!');
+		console.error(error);
 	}
 
 	if (isSuccess) {
 		return (
-			<Container>
-				<Title text={data.name} size="xl"/>
-				<p>Здесь будет описание товара...</p>
+			<Container className='pt-5'>
+				{data.category_id === CategoriesId.pizzas &&
+					<ChoicePizzaPage
+						categoryId={data.category_id}
+						name={data.name}
+						description={data.description}
+						count={data.count}
+						variations={data.variations as PizzaVariation[]}
+						default_ingredients={data.default_ingredients}
+						onSubmit={onSubmit}
+						loading={isLoading}
+					/>
+				}
+				{data.category_id === CategoriesId.combo &&
+					<p>Страница для комбо товаров еще не готова</p>
+				}
+				{data.category_id != CategoriesId.pizzas && data.category_id != CategoriesId.combo &&
+					<ChoiceProductPage
+						categoryId={data.category_id}
+						name={data.name}
+						description={data.description}
+						count={data.count}
+						variations={data.variations as Variation[]}
+						onSubmit={onSubmit}
+						loading={isLoading}
+					/>
+				}
 			</Container>
 		);
 	}
-
 }
