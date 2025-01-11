@@ -86,7 +86,12 @@ export const productApi = baseApi.injectEndpoints({
 		}),
 
 		// отфильтрованные товары определенной категории
-		getFilterProducts: builder.query<ProductWithPagination, { category_id?: string, page?: string }>({
+		getFilterProducts: builder.query<ProductWithPagination, {
+			search?: string,
+			category_id?: number,
+			page?: number,
+			page_size?: number
+		}>({
 			query: (query) => ({
 				url: 'products/',
 				params: query,

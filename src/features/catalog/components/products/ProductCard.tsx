@@ -53,10 +53,12 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 				</p>
 			</div>
 			<div className="flex justify-between items-center">
-				{product.count > 0 && <span className="text-[16px] font-semibold">
-				{product.variation_have && 'от '}
-					<b>{product.min_price} ₽</b>
-			</span>}
+				{product.count > 0 &&
+					<span className="text-[16px] font-semibold">
+						{product.variation_have && 'от '}
+							<b>{product.min_price} ₽</b>
+					</span>
+				}
 				{product.count != 0 &&
 					<Button
 						className="px-7 py-2 text-[16px] font-normal"

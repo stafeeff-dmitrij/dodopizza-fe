@@ -20,7 +20,7 @@ import { getErrorToast } from '../../lib';
 export function Category() {
 
 	const { id } = useParams();
-	const { data, isLoading, isSuccess, isError } = useGetFilterProductsQuery({ category_id: id });
+	const { data, isLoading, isSuccess, isError } = useGetFilterProductsQuery({ category_id: Number(id), page_size: 12 });
 
 	const dispatch = useDispatch<AppDispatch>();
 
