@@ -65,7 +65,6 @@ export const ChoicePizzaPage: React.FC<Props> = ({
 	console.log('Кол-во ингредиентов: ', default_ingredients.length)
 
 	const dispatch = useDispatch<AppDispatch>();
-	dispatch(setActiveCategoryId(categoryId));
 
 	const {
 		size,
@@ -91,13 +90,18 @@ export const ChoicePizzaPage: React.FC<Props> = ({
 		onSubmit(activeVariation.id, ingredientsId);
 	};
 
+	// смена активной категории (в меню)
+	React.useEffect(() => {
+		dispatch(setActiveCategoryId(categoryId));
+	}, [categoryId])
+
 	return (
 		<div className={cn('flex flex-1 w-full h-[700px] gap-x-6', className)}>
 			<PizzaImage className='w-[520px] bg-[#fffcf8] rounded-3xl' imageUrl={activeVariation.image} alt={name} size={activeVariation.pizza_size}/>
 			<div className='flex flex-col justify-between pt-5 rounded-[20px]'>
 				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
 				<div className="w-[410px] px-[30px] overflow-auto">
-					<Title text={name} size="xl" className="mb-1 font-normal text-[24px]"/>
+					<Title text={name} size="xl" className="mb-1 text-[28px] leading-8 font-normal"/>
 					<p className="mb-2 pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
 					<p className="mb-5 text-[14px] leading-[18px] text-black text-justify">{description}</p>
 					<div className="flex flex-col gap-[6px] pb-6">

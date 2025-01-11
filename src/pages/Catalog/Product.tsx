@@ -28,6 +28,10 @@ export function Product() {
 		console.error(error);
 	}
 
+	if (isLoading) {
+		return <p>Идет загрузка...</p>
+	}
+
 	if (isSuccess) {
 		return (
 			<Container className='pt-5'>

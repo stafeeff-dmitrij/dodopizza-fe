@@ -35,8 +35,8 @@ export function Main() {
 							category.products.length > 0 && (
 								<ProductsGroupList
 									key={category.id}
-									title={category.name}
 									categoryId={category.id}
+									title={category.name}
 									products={category.products}
 								/>
 							)

@@ -52,7 +52,6 @@ export const ChoiceProductPage: React.FC<Props> = ({
 }) => {
 
 	const dispatch = useDispatch<AppDispatch>();
-	dispatch(setActiveCategoryId(categoryId));
 
 	const {
 		value,
@@ -68,12 +67,20 @@ export const ChoiceProductPage: React.FC<Props> = ({
 	const shortDescription = getShortDescriptionProduct(categoryId, activeVariation);
 	const totalPrice = calcTotalPizzaPrice(activeVariation, selectedIngredientsId);
 
+	// большое изображение, если 1 вариация, или, если вариаций 2, и активна вторая
+	const bigImage = variations.length === 1 && activeVariation.id === variations[0].id || variations.length === 2 && activeVariation != variations[0]
+
 	// добавление товара в корзину
 	const handleClickAdd = () => {
 		// выбранные ингредиенты текущей активной вариации
 		const ingredientsId = getCurrentIngredients(activeVariation.ingredients, selectedIngredientsId);
 		onSubmit(activeVariation.id, ingredientsId);
 	};
+
+	// смена активной категории (в меню)
+	React.useEffect(() => {
+		dispatch(setActiveCategoryId(categoryId));
+	}, [categoryId])
 
 	return (
 		<div className={cn(
@@ -83,15 +90,15 @@ export const ChoiceProductPage: React.FC<Props> = ({
 		)}>
 			<ProductImage
 				className='bg-[#fffcf8] rounded-3xl'
+				imageClassName={bigImage ? 'w-[60%]' : 'w-[50%]'}
 				imageUrl={activeVariation.image}
-				bigImage={variations.length === 1 && activeVariation.id === variations[0].id || variations.length > 1 && activeVariation != variations[0]}
-				smaller={true}
+				bigImage={bigImage}
 				alt={name}
 			/>
 			<div className='flex flex-col justify-between pt-[30px]'>
 				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
 				<div className="w-[410px] px-[30px] overflow-auto">
-					<Title text={name} size="xl" className="mb-1 font-normal text-[24px]"/>
+					<Title text={name} size="xl" className="mb-1 text-[28px] leading-8 font-normal"/>
 					<p className="mb-2 pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
 					<p className="mb-5 text-[14px] leading-[18px] text-black text-justify">{description}</p>
 					<div className="flex flex-col gap-[6px] pb-4">
@@ -117,7 +124,7 @@ export const ChoiceProductPage: React.FC<Props> = ({
 										price={ingredient.price}
 										image={ingredient.image}
 										onClick={() => addIngredient(ingredient.id)}
-										// // проверка id текущего ингредиента в selectedIngredientsId
+										// проверка id текущего ингредиента в selectedIngredientsId
 										active={selectedIngredientsId.has(ingredient.id)}
 									/>
 								))}

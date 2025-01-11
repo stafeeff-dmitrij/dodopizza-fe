@@ -17,7 +17,7 @@ interface Props {
  * @component
  * @description Блок с категориями товаров
  *
- * @prop {Category[]} categories - категории товаров
+ * @prop categories - категории товаров
  */
 export const Categories: React.FC<Props> = ({ categories, className }) => {
 

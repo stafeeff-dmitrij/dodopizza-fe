@@ -19,14 +19,14 @@ interface Props {
  */
 export const SearchInput: React.FC<Props> = ({ className }) => {
 
+	const ref = React.useRef(null);
+
 	const [focused, setFocused] = React.useState(false);
 	const [searchInput, setSearchInput] = React.useState('')
 	const [products, setProducts] = React.useState<Product[]>([]);
 
 	// ограничиваем частоту запросов на бэк при изменении инпута в 500 мс
 	const debouncedSearchQuery = useDebounce(searchInput, 500);
-
-	const ref = React.useRef(null);
 
 	const { data, isLoading, isSuccess } = useGetFilterProductsQuery({ search: debouncedSearchQuery }, {
 		skip: debouncedSearchQuery === '',
@@ -37,7 +37,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 		if (isSuccess) {
 			setProducts(data.results.slice(0,5));
 		}
-	}, [data?.results, isSuccess]);
+	}, [data?.results, debouncedSearchQuery]);
 
 	const clearInput = () => {
 		setSearchInput('');
