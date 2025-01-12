@@ -33,8 +33,6 @@ export const ProductsGroupList: React.FC<Props> = ({
 	className,
 }) => {
 
-	console.log('ProductsGroupList');
-
 	const dispatch = useDispatch<AppDispatch>();
 
 	const crossRef = React.useRef<HTMLDivElement>(null);

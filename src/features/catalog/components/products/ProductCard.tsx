@@ -9,6 +9,7 @@ import { Product } from '../../../../redux/api/productApi.ts';
 import { setActiveModal } from '../../../../redux/slices/productModalSlice.ts';
 import { cn } from '../../../../lib';
 import { addProductToCart } from '../../../product/utils';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 interface Props {
@@ -24,11 +25,17 @@ interface Props {
  */
 export const ProductCard: React.FC<Props> = ({ product, className }) => {
 
+	const { pathname } = useLocation();
+	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>()
 
-	// открытие модального окна с товаром из карточки
-	const onOpenModalClick = () => {
-		dispatch(setActiveModal(product));
+	// редирект на страницу товара либо открытие модального окна
+	const onClick = () => {
+		if (pathname.includes('product')) {
+			navigate(`/product/${product.id}`);
+		} else {
+			dispatch(setActiveModal(product));
+		}
 	}
 
 	// добавление товара в корзину
@@ -40,7 +47,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 	return (
 		<div
 			className={cn('flex flex-col justify-between w-[233px] cursor-pointer', className)}
-			onClick={() => onOpenModalClick()}
+			onClick={() => onClick()}
 		>
 			<div className="flex flex-col">
 				<img
@@ -64,7 +71,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 					<Button
 						className="px-7 py-2 text-[16px] font-normal"
 						variant="secondary"
-						onClick={product.variation_have ? onOpenModalClick : onAddProductToCartClick}
+						onClick={product.variation_have ? onClick : onAddProductToCartClick}
 					>
 						{product.variation_have ? 'Выбрать' : 'В корзину'}
 					</Button>

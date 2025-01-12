@@ -29,17 +29,18 @@ const sliders = [
 export const CarouselMain: React.FC<Props> = ({ className }) => {
 
 	return (
-		<Container className={cn('max-w-[1360px] pt-3', className)}>
+		// <Container className={cn('w-[1060px] pt-3', className)}>
+		<Container className={cn('w-[1092px] pt-3', className)}>
 			<Carousel
 				plugins={[
 					Autoplay({
-						delay: 5000,
+						delay: 10000,
 					}),
 				]}
 			>
-				<CarouselContent className='w-full'>
+				<CarouselContent className='w-full -ml-0'>
 					{sliders.map((image, index) =>
-						<CarouselItem key={index} className='basis-[1060px]'>
+						<CarouselItem key={index} className='basis-[1060px] pl-2 pr-2'>
 							<img
 								className='rounded-[20px]'
 								src={image}
