@@ -44,7 +44,7 @@ export const MainMenu: React.FC<Props> = ({ className }) => {
 			className={cn(
 				'flex items-center h-14 sticky top-[-1px] bg-white py-2',
 				{
-					'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-10 backdrop-blur-[20px] bg-white/75': isSticky,
+					'shadow-[0px_4px_30px_rgba(6,5,50,0.1)] z-20 backdrop-blur-[20px] bg-white/75': isSticky,
 				}
 				, className
 			)}

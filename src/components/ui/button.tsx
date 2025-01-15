@@ -7,7 +7,7 @@ import { cn } from '../../lib';
 
 
 const buttonVariants = cva(
-	'inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-3xl text-sm font-normal ring-offset-background ' +
+	'inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-3xl text-sm font-normal ring-offset-background cursor-pointer ' +
 	'transition duration-300 ' +
 	'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ' +
 	'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[#e2e2e9] disabled:text-[#abadba]' +
@@ -23,7 +23,7 @@ const buttonVariants = cva(
 				destructive:
 					'bg-destructive text-destructive-foreground hover:bg-[#eb3b30]',
 				link: 'text-foreground underline-offset-4 hover:text-primary hover:underline',
-				block: 'bg-[#666565]',
+				block: 'bg-muted text-muted-foreground cursor-not-allowed',
 			},
 			size: {
 				default: 'h-10 px-5 py-2',
