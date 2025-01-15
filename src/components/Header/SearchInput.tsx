@@ -39,9 +39,15 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 		}
 	}, [data?.results, debouncedSearchQuery]);
 
+	// сброс инпута, если есть значени
+	// сброс фокуса при пустом инпуте
 	const clearInput = () => {
-		setSearchInput('');
-		setProducts([]);
+		if (!searchInput) {
+			setFocused(false);
+		} else {
+			setSearchInput('');
+			setProducts([]);
+		}
 	};
 
 	// сброс фокуса и инпута

@@ -12,4 +12,11 @@ export {
 	PaginationNext,
 	PaginationPrevious,
 } from "./pagination.tsx"
+export {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "./select.tsx"
 

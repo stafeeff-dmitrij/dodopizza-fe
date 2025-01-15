@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Title } from '../../components/typography';
 import { Container } from '../../components/layout';
-import { ProductsList } from '../../features/catalog/components';
+import { ProductsList, SelectSort } from '../../features/catalog/components';
 
 import { AppDispatch } from '../../redux/store.ts';
 import { selectCategory, setActiveCategoryId } from '../../redux/slices/categorySlice.ts';
@@ -54,9 +54,9 @@ export function Category() {
 					Блок с фильтрами
 				</div>
 				<div>
-					<div className="flex justify-between items-center gap-x-8 mb-10">
+					<div className="flex justify-between items-center gap-x-8 mb-12">
 						{foundCategory && <Title text={foundCategory.name} size="lg" className="text-3xl"/>}
-						<div className="flex px-6 py-2 rounded-[8px] shadow-[0px_6px_20px_rgba(6,5,50,0.1)]">Блок сортировки</div>
+						<SelectSort/>
 					</div>
 					{isLoading && <p>Идет загрузка...</p>}
 					{isSuccess && <ProductsList products={data.results} className="grid-cols-3 gap-x-6 pb-8"/>}
