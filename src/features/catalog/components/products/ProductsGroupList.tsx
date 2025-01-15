@@ -9,6 +9,8 @@ import { Title } from '../../../../components/typography';
 import { ProductsList } from './ProductsList.tsx';
 import { Product } from '../../../../redux/api/productApi.ts';
 import { cn } from '../../../../lib';
+import { Button } from '../../../../components/ui';
+import { ChevronRight } from 'lucide-react';
 
 
 interface Props {
@@ -54,10 +56,16 @@ export const ProductsGroupList: React.FC<Props> = ({
 	return (
 		// через ref навешивает на блок intersectionRef + задаем id блоку для автоматического скролла до нужного блока по id текущей активной категории
 		<div className={className} id={title} ref={crossRef}>
-			<Link to={`category/${categoryId}`}>
-				<Title text={title} size="lg" className={cn("font-medium mb-8 hover:text-primary transition duration-300")}/>
-			</Link>
-			<ProductsList products={products} />
+			<div className='flex items-center justify-between mb-8 border-b border-slate-100'>
+				<Title text={title} size="lg" className={cn('pl-4 pb-1 font-medium')}/>
+				<Link to={`category/${categoryId}`} className='mr-4'>
+					<Button size='sm' variant='secondary' className='pl-4 pr-3 border-[1px] border-secondary-foreground'>
+						<p>Подобрать товар</p>
+						<ChevronRight className="h-4 w-4"/>
+					</Button>
+				</Link>
+			</div>
+			<ProductsList products={products}/>
 		</div>
 	);
 };
