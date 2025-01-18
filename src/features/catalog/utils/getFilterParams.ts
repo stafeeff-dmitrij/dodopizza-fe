@@ -1,0 +1,40 @@
+import { FilterParams, sortType } from '../hooks/useFiltersParams.ts';
+
+export interface ReturnProps {
+	category_id?: string;
+	min_price?: number;
+	max_price?: number;
+	ingredients?: string[];
+	sort?: sortType;
+	page: number;
+	page_size: number;
+}
+
+/**
+ * Возврат заполненных параметров фильтрации
+ */
+export const getFilterParams = (pageSize: number, filters: FilterParams, category_id?: string): ReturnProps => {
+
+	const params: ReturnProps = {
+		page_size: pageSize,
+		page: filters.page,
+	};
+
+	if (category_id) {
+		params.category_id = category_id;
+	}
+	if (filters.prices.priceFrom) {
+		params.min_price = filters.prices.priceFrom;
+	}
+	if (filters.prices.priceTo) {
+		params.max_price = filters.prices.priceTo;
+	}
+	if (filters.selectedIngredients?.size) {
+		params.ingredients = [...filters.selectedIngredients];
+	}
+	if (filters.sortType) {
+		params.sort = filters.sortType;
+	}
+
+	return params;
+}

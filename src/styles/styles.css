@@ -71,7 +71,7 @@
     --destructive: 3, 100%, 59%;
     --destructive-foreground: 0, 0%, 100%;
     --border: 225, 10%, 84%;
-    --input: 0, 0%, 100%;
+    --input: 0 0% 90%;
     --ring: 25, 100%, 49%;
     --radius: 0.5rem;
   }
@@ -89,6 +89,24 @@ html {
   html {
     scroll-behavior: auto;
   }
+}
+/* кастомный тоненький аккуратный ползунок справа сбоку при скролле (вместо стандартного толстого уродливого) */
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background: #fff;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #dbdadd;
+  border-radius: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #c9c9c9;
 }
 
 /*# sourceMappingURL=styles.css.map */

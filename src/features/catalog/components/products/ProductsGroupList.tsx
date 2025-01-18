@@ -60,7 +60,7 @@ export const ProductsGroupList: React.FC<Props> = ({
 				<Title text={title} size="lg" className={cn('pl-4 pb-1 font-medium')}/>
 				<Link to={`category/${categoryId}`} className='mr-4'>
 					<Button size='sm' variant='secondary' className='pl-4 pr-3 border-[1px] border-secondary-foreground'>
-						<p>Подобрать товар</p>
+						<p>Выбрать {categoryId != 13 && title.toLowerCase()}</p>
 						<ChevronRight className="h-4 w-4"/>
 					</Button>
 				</Link>

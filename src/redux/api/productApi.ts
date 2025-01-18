@@ -6,6 +6,8 @@ import {
 	TProductCount,
 	TProductVolume, TWeightValue
 } from '../../features/product/constants.ts';
+import { Ingredient } from './ingredientsApi.ts';
+import { sortType } from '../../features/catalog/hooks/useFiltersParams.ts';
 
 // главная страница
 export interface CategoryWithProduct {
@@ -34,14 +36,8 @@ export interface Product {
 	count: number,
 }
 
-// дефолтные ингредиенты товара
-export interface IngredientProduct {
-	id: number,
-	name: string,
-}
-
 // ингредиенты вариации товара
-export interface IngredientVariation extends IngredientProduct {
+export interface IngredientVariation extends Ingredient {
 	image: string,
 	price: number,
 }
@@ -68,8 +64,19 @@ export interface ProductDetail {
 	description: string,
 	count: number,
 	category_id: number,
-	default_ingredients: IngredientProduct[],
+	default_ingredients: Ingredient[],
 	variations: Variation[],
+}
+
+interface filterParams {
+	search?: string,
+	category_id?: string,
+	sort?: sortType,
+	min_price?: number,
+	max_price?: number,
+	ingredients?: string[],
+	page?: number,
+	page_size?: number
 }
 
 /**
@@ -79,19 +86,14 @@ export interface ProductDetail {
 export const productApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
 
-		// все товары
+		// все товары с группировкой по категориям (для главной страницы)
 		getAllProducts: builder.query<CategoryWithProduct[], void>({
 			query: () => 'all_products/',
 			providesTags: ['all_products'],
 		}),
 
 		// отфильтрованные товары определенной категории
-		getFilterProducts: builder.query<ProductWithPagination, {
-			search?: string,
-			category_id?: number,
-			page?: number,
-			page_size?: number
-		}>({
+		getFilterProducts: builder.query<ProductWithPagination, filterParams>({
 			query: (query) => ({
 				url: 'products/',
 				params: query,

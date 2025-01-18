@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { cn, formatPrice } from '../../../../lib';
-import { IngredientProduct, Variation } from '../../../../redux/api/productApi.ts';
+import { Ingredient, Variation } from '../../../../redux/api/productApi.ts';
 import { Title } from '../../../../components/typography';
 import { IngredientCard, PizzaImage, VariationsGroup } from '../index.ts';
 import { Button } from '../../../../components/ui';
@@ -30,7 +30,7 @@ export interface Props {
 	name: string,
 	description: string,
 	count: number
-	default_ingredients: IngredientProduct[],
+	default_ingredients: Ingredient[],
 	variations: PizzaVariation[],
 	onSubmit: (variationId: number, ingredientsId: number[]) => void;
 	loading: boolean;

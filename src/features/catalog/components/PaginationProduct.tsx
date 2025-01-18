@@ -60,7 +60,7 @@ export const PaginationProduct: React.FC<Props> = ({ totalPages, currentPage, se
 						</PaginationItem>;
 					} else if (!visiblePage.includes(i + 1) && !visiblePaginationEllipsis) {
 						visiblePaginationEllipsis = true;
-						return <PaginationItem>
+						return <PaginationItem key={i}>
 							<PaginationEllipsis/>
 						</PaginationItem>;
 					} else {

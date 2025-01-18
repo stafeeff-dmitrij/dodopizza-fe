@@ -3,6 +3,7 @@ export { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 export { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from './dialog.tsx';
 export { Input } from './input';
 export { Skeleton } from './skeleton.tsx';
+export { Slider } from './slider.tsx';
 export {
 	Pagination,
 	PaginationContent,

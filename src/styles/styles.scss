@@ -35,7 +35,8 @@
     --destructive-foreground: 0, 0%, 100%;  // Цвет текста на элементах с разрушительным цветом
 
     --border: 225, 10%, 84%;  // Цвет границ элементов интерфейса
-    --input: 0, 0%, 100%;  // Цвет фона для полей ввода
+    //--input: 0, 0%, 100%;  // Цвет фона для полей ввода
+    --input: 0 0% 90%;
     --ring: 25, 100%, 49%;  // Цвет обводки (или “кольца”) вокруг элементов при взаимодействии (например, при фокусе)
     --radius: 0.5rem;  // Значение радиуса скругления углов элементов (8px)
   }
@@ -75,7 +76,6 @@
 // плавный скролл при клике по href
 html {
   scroll-behavior: smooth;
-
 }
 
 /* отключение плавного скролла в зависимости от настроек пользователя */
@@ -83,6 +83,25 @@ html {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* кастомный тоненький аккуратный ползунок справа сбоку при скролле (вместо стандартного толстого уродливого) */
+.scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 6px;
+  background: #fff;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #dbdadd;
+  border-radius: 6px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #c9c9c9;
 }
 
 //@layer utilities {
