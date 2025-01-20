@@ -26,7 +26,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
 	const [products, setProducts] = React.useState<Product[]>([]);
 
 	// ограничиваем частоту запросов на бэк при изменении инпута в 500 мс
-	const debouncedSearchQuery = useDebounce(searchInput, 500);
+	const debouncedSearchQuery = useDebounce<string>(searchInput, 500);
 
 	const { data, isLoading, isSuccess } = useGetFilterProductsQuery({ search: debouncedSearchQuery }, {
 		skip: debouncedSearchQuery === '',

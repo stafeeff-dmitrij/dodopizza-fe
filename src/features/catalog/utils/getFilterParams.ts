@@ -11,7 +11,8 @@ export interface ReturnProps {
 }
 
 /**
- * Возврат заполненных параметров фильтрации
+ * Возврат заполненных параметров фильтрации.
+ * Используется для фильтрации незаполненных параметров перед отправкой запроса на бэк.
  */
 export const getFilterParams = (pageSize: number, filters: FilterParams, category_id?: string): ReturnProps => {
 

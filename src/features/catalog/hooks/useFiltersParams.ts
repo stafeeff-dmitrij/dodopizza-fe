@@ -3,9 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useSet } from 'react-use';
 
 
-interface PriceRangeProps {
-	priceFrom?: number;
-	priceTo?: number;
+export interface PriceRangeProps {
+	priceFrom: number;
+	priceTo: number;
 }
 
 export type sortType = 'popular' | 'price' | 'name';
@@ -32,10 +32,7 @@ export const useFiltersParams = (): FilterParams => {
 
 	const [searchParams] = useSearchParams();
 
-	// сортировка
 	const [sortType, setSortType] = useState<sortType | undefined>(searchParams.get('sort') as sortType);
-
-	// номер страницы
 	const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
 
 	// диапазон стоимости товаров
@@ -51,13 +48,12 @@ export const useFiltersParams = (): FilterParams => {
 
 	const updatePrices = (name: keyof PriceRangeProps, value: number) => {
 		setPrices(prev => ({ ...prev, [name]: value }));
-		setPage(1);
 	};
 
-	const updateSelectedIngredients = (value: string) => {
-		toggleIngredients(value);
+	// сброс страницы при изменении чувствительных данных
+	React.useEffect(() => {
 		setPage(1);
-	}
+	}, [prices, selectedIngredients])
 
 	return React.useMemo(
 		() => ({
@@ -66,8 +62,7 @@ export const useFiltersParams = (): FilterParams => {
 			page,
 			sortType,
 			setPrices: updatePrices,
-			// setSelectedIngredients: toggleIngredients,
-			setSelectedIngredients: updateSelectedIngredients,
+			setSelectedIngredients: toggleIngredients,
 			setPage,
 			setSortType
 		}),
