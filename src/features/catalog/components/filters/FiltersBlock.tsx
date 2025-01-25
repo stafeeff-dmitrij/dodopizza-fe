@@ -3,10 +3,11 @@ import React from 'react';
 import { Input } from '../../../../components/ui';
 import { RangeSlider } from '../RangeSlider.tsx';
 import { CheckboxFiltersGroup } from './CheckboxFiltersGroup.tsx';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useGetIngredientsQuery } from '../../../../redux/api/ingredientsApi.ts';
 import { FilterParams, PriceRangeProps } from '../../hooks/useFiltersParams.ts';
 import { useDebounce } from '../../../../hooks';
+import { MAX_PRICE, MIN_PRICE } from '../../constants.ts';
 
 
 interface Props {
@@ -22,12 +23,14 @@ interface Props {
  */
 export const FiltersBlock: React.FC<Props> = ({ filters, className }) => {
 
+	const [searchParams] = useSearchParams();
+
 	const { id } = useParams();  // id категории
 	const { data: ingredients, isLoading } = useGetIngredientsQuery({ category_id: Number(id) });
 
 	const [prices, setPrices] = React.useState<PriceRangeProps>({
-		priceFrom: filters.prices.priceFrom,
-		priceTo: filters.prices.priceTo,
+		priceFrom: Number(searchParams.get('min_price')) || MIN_PRICE,
+		priceTo: Number(searchParams.get('max_price')) || MAX_PRICE,
 	});
 
 	// ограничиваем частоту запросов на бэк при изменении диапазона цен в 500 мс
@@ -51,6 +54,12 @@ export const FiltersBlock: React.FC<Props> = ({ filters, className }) => {
 		filters.setPrices('priceTo', prices.priceTo);
 	}, [debouncedPrices])
 
+	// сброс значений в инпутах при переходе в другую категорию
+	React.useEffect(() => {
+		updatePrices('priceFrom',Number(searchParams.get('min_price')) || MIN_PRICE);
+		updatePrices('priceTo', Number(searchParams.get('max_price')) || MAX_PRICE,);
+	}, [id])
+
 	return (
 		<div className={className}>
 
@@ -70,9 +79,9 @@ export const FiltersBlock: React.FC<Props> = ({ filters, className }) => {
 					<Input
 						className='h-9 py-1 px-5 rounded-[12px] focus:border-primary'
 						type="number"
+						placeholder="2000"
 						min={100}
 						max={2000}
-						placeholder="2000"
 						value={String(prices.priceTo)}
 						onChange={(e) => updatePrices('priceTo', Number(e.target.value))}
 					/>

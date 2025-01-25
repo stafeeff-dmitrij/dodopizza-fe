@@ -1,4 +1,5 @@
-import { FilterParams, sortType } from '../hooks/useFiltersParams.ts';
+import { sortType } from '../hooks/useFiltersParams.ts';
+import { Filters } from '../hooks/useQueryFilters.ts';
 
 export interface ReturnProps {
 	category_id?: string;
@@ -7,17 +8,16 @@ export interface ReturnProps {
 	ingredients?: string[];
 	sort?: sortType;
 	page: number;
-	page_size: number;
+	page_size?: number;
 }
 
 /**
  * Возврат заполненных параметров фильтрации.
  * Используется для фильтрации незаполненных параметров перед отправкой запроса на бэк.
  */
-export const getFilterParams = (pageSize: number, filters: FilterParams, category_id?: string): ReturnProps => {
+export const getFilterParams = (filters: Filters, category_id?: string, pageSize?: number): ReturnProps => {
 
 	const params: ReturnProps = {
-		page_size: pageSize,
 		page: filters.page,
 	};
 
@@ -35,6 +35,9 @@ export const getFilterParams = (pageSize: number, filters: FilterParams, categor
 	}
 	if (filters.sortType) {
 		params.sort = filters.sortType;
+	}
+	if (pageSize) {
+		params.page_size = pageSize;
 	}
 
 	return params;

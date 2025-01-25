@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useSet } from 'react-use';
+import { MAX_PRICE, MIN_PRICE } from '../constants.ts';
 
 
 export interface PriceRangeProps {
@@ -21,39 +22,45 @@ export interface FilterParams {
 	setSortType: (value: sortType) => void;
 }
 
-const MIN_PRICE = 0;
-const MAX_PRICE = 2000;
-
 /**
  * @function
  * @description Чтение из URL, хранение и возврат параметров фильтрации товаров
+ *
+ * @arg id - id активной категории товаров
  */
-export const useFiltersParams = (): FilterParams => {
+export const useFiltersParams = (id?: string): FilterParams => {
 
 	const [searchParams] = useSearchParams();
+	const lastCategoryId = React.useRef(id);  // id старой активной категории товаров
 
-	const [sortType, setSortType] = useState<sortType | undefined>(searchParams.get('sort') as sortType);
+	const [sortType, setSortType] = useState<sortType | undefined>(searchParams.get('sort') as sortType || '');
 	const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
 
 	// диапазон стоимости товаров
 	const [prices, setPrices] = React.useState<PriceRangeProps>({
-		priceFrom: Number(searchParams.get('priceFrom')) || MIN_PRICE,
-		priceTo: Number(searchParams.get('priceTo')) || MAX_PRICE,
+		priceFrom: Number(searchParams.get('min_price')) || MIN_PRICE,
+		priceTo: Number(searchParams.get('max_price')) || MAX_PRICE,
 	});
 
 	// выбранные ингредиенты
-	const [selectedIngredients, { toggle: toggleIngredients }] = useSet(new Set<string>(
-		searchParams.get('ingredients')?.split(','))
-	);
+	const [selectedIngredients, { toggle: toggleIngredients, clear: clearIngredients }] = useSet(new Set<string>(
+		searchParams.get('ingredients')?.split(',')
+	));
 
 	const updatePrices = (name: keyof PriceRangeProps, value: number) => {
 		setPrices(prev => ({ ...prev, [name]: value }));
 	};
 
-	// сброс страницы при изменении чувствительных данных
-	React.useEffect(() => {
-		setPage(1);
-	}, [prices, selectedIngredients])
+	// сброс параметров фильтрации при изменении категории товаров
+	// используем lastCategoryId, чтобы параметры фильтрации не сбрасывались при открытии страницы по ссылке с активными параметрами
+	useEffect(() => {
+		if (lastCategoryId.current != id) {
+			clearIngredients();
+			setSortType(searchParams.get('sort') as sortType || '');
+			setPage(Number(searchParams.get('page')) || 1);
+			lastCategoryId.current = id;
+		}
+	}, [id]);
 
 	return React.useMemo(
 		() => ({

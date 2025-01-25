@@ -21,7 +21,7 @@ interface Props {
 export const SelectSort: React.FC<Props> = ({ value, setValue, className }) => {
 	return (
 		<div className={cn("flex rounded-[8px] ", className)}>
-			<Select onValueChange={(v) => setValue(v as sortType)} defaultValue={value || undefined}>
+			<Select onValueChange={setValue} value={value}>
 				<SelectTrigger className='pl-5'>
 					<SelectValue placeholder="Сортировка" />
 				</SelectTrigger>

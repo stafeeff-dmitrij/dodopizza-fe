@@ -3,7 +3,6 @@ import { useTitle } from 'react-use';
 
 import { Container } from '../../components/layout';
 import { CarouselMain, ProductsGroupList } from '../../features/catalog/components';
-
 import { useGetAllProductsQuery } from '../../redux/api';
 import { getErrorToast } from '../../lib';
 
