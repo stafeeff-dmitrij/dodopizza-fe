@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Title } from '../../components/typography';
 import { Container } from '../../components/layout';
-import { FiltersBlock, ProductsList, SelectSort } from '../../features/catalog/components';
+import { FiltersBlock, NotResults, ProductsList, SelectSort } from '../../features/catalog/components';
 
 import { AppDispatch } from '../../redux/store.ts';
 import { selectCategory, setActiveCategoryId } from '../../redux/slices/categorySlice.ts';
@@ -53,23 +53,25 @@ export function Category() {
 		<div>
 			<Container className="flex justify-between gap-x-7 pt-6 pb-6">
 				<FiltersBlock
-					className="flex flex-col self-start gap-6 w-[280px] top-20 p-6 sticky rounded-[12px] shadow-[0px_6px_20px_rgba(6,5,50,0.1)]"
+					className="flex flex-col self-start gap-6 min-w-[280px] top-20 p-6 sticky rounded-[12px] shadow-[0px_6px_20px_rgba(6,5,50,0.1)]"
 					filters={filters}
 				/>
-				<div>
+				<div className="flex flex-col justify-between w-full">
 					<div className="flex justify-between items-center gap-x-8 mb-12">
 						<div className="flex items-center gap-1">
 							{foundCategory && <Title text={foundCategory.name} size="lg" className="text-3xl"/>}
-							{data?.results && <span className='text-[18px]'>({data.count})</span>}
+							{data?.results && data.results.length > 0 && <span className='text-[18px]'>({data.count})</span>}
 						</div>
 						<SelectSort
 							value={filters.sortType}
 							setValue={filters.setSortType}
+							disabled={data?.results.length === 0}
 						/>
 					</div>
 					{isLoading && <p>Идет загрузка...</p>}
-					{isSuccess && <ProductsList products={data.results} className="grid-cols-3 gap-x-6 pb-8"/>}
-					{isSuccess && data.total_pages !== 1 &&
+					{isSuccess && data.results.length > 0 && <ProductsList products={data.results} className="grid-cols-3 gap-x-6 pb-8"/>}
+					{isSuccess && data.results.length === 0 && <NotResults/>}
+					{isSuccess && data.total_pages !== 1 && data.results.length > 0 &&
 						<PaginationProduct
 							className='pt-6 pb-6 border-t border-slate-100'
 							totalPages={data.total_pages || 1}

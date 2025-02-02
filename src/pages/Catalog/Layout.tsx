@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import { MainMenu, TopBar } from '../../components/menu';
-import { Header } from '../../components/Header';
+import { Header } from '../../components/header';
 import { ProductModal } from '../../features/product/components';
 
 
