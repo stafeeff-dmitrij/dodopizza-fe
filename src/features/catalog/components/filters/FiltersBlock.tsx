@@ -41,12 +41,18 @@ export const FiltersBlock: React.FC<Props> = ({ filters, className }) => {
 	const ingredientItems = ingredients?.map(ingredient => ({ value: String(ingredient.id), text: ingredient.name })) || [];
 
 	const updatePrices = (name: keyof PriceRangeProps, value: number) => {
-		setPrices(prev => ({ ...prev, [name]: value }));
+		if (value >= MIN_PRICE && value <= MAX_PRICE) {
+			setPrices(prev => ({ ...prev, [name]: value }));
+		}
 	};
 
 	const updatePricesRange = (pricesRange: number[]) => {
-		updatePrices('priceFrom', pricesRange[0]);
-		updatePrices('priceTo', pricesRange[1]);
+		if (pricesRange[0] >= MIN_PRICE && pricesRange[0] <= MAX_PRICE) {
+			updatePrices('priceFrom', pricesRange[0]);
+		}
+		if (pricesRange[1] >= MIN_PRICE && pricesRange[1] <= MAX_PRICE) {
+			updatePrices('priceTo', pricesRange[1]);
+		}
 	};
 
 	// обновление цен в основном состоянии фильтрации с задержкой в 500 с (меньше запросов к бэку)
@@ -71,27 +77,27 @@ export const FiltersBlock: React.FC<Props> = ({ filters, className }) => {
 					<Input
 						className='h-9 py-1 px-5 rounded-[12px] focus:border-primary'
 						type="number"
-						placeholder="0"
-						min={0}
-						max={2000}
+						placeholder={`${MIN_PRICE}`}
+						min={MIN_PRICE}
+						max={MAX_PRICE}
 						value={String(prices.priceFrom)}
 						onChange={(e) => updatePrices('priceFrom', Number(e.target.value))}
 					/>
 					<Input
 						className='h-9 py-1 px-5 rounded-[12px] focus:border-primary'
 						type="number"
-						placeholder="2000"
+						placeholder={`${MAX_PRICE}`}
 						min={100}
-						max={2000}
+						max={MAX_PRICE}
 						value={String(prices.priceTo)}
 						onChange={(e) => updatePrices('priceTo', Number(e.target.value))}
 					/>
 				</div>
 				<RangeSlider
-					min={0}
-					max={2000}
+					min={MIN_PRICE}
+					max={MAX_PRICE}
 					step={10}
-					value={[prices.priceFrom || 0, prices.priceTo || 2000]}
+					value={[prices.priceFrom || 0, prices.priceTo || MAX_PRICE]}
 					onValueChange={updatePricesRange}
 				/>
 			</div>
