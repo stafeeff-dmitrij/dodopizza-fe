@@ -8,6 +8,7 @@ import { useGetIngredientsQuery } from '../../../../redux/api/ingredientsApi.ts'
 import { FilterParams, PriceRangeProps } from '../../hooks/useFiltersParams.ts';
 import { useDebounce } from '../../../../hooks';
 import { MAX_PRICE, MIN_PRICE } from '../../constants.ts';
+import { SwitchInHave } from './SwitchInHave.tsx';
 
 
 interface Props {
@@ -108,6 +109,13 @@ export const FiltersBlock: React.FC<Props> = ({ filters, className }) => {
 				selectedValues={filters.selectedIngredients}
 				sizeVisible={true}
 			/>}
+
+			{/* Только активные товары */}
+			<SwitchInHave
+				isChecked={filters.onlyInHave}
+				setChecked={filters.setOnlyInHave}
+			/>
+
 		</div>
 	);
 };

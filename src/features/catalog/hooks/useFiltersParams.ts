@@ -14,12 +14,14 @@ export type sortType = 'popular' | 'price' | 'name';
 export interface FilterParams {
 	prices: PriceRangeProps;
 	selectedIngredients: Set<string>;
-	sortType: sortType | undefined;
 	page: number;
+	sortType: sortType | undefined;
+	onlyInHave: boolean;
 	setPrices: (name: keyof PriceRangeProps, value: number) => void;
 	setSelectedIngredients: (value: string) => void;
 	setPage: (value: number) => void;
 	setSortType: (value: sortType) => void;
+	setOnlyInHave: (value: boolean) => void;
 }
 
 /**
@@ -35,6 +37,7 @@ export const useFiltersParams = (id?: string): FilterParams => {
 
 	const [sortType, setSortType] = useState<sortType | undefined>(searchParams.get('sort') as sortType || '');
 	const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
+	const [onlyInHave, setOnlyInHave] = useState(!!searchParams.get('in_have') || false);
 
 	// диапазон стоимости товаров
 	const [prices, setPrices] = React.useState<PriceRangeProps>({
@@ -57,6 +60,7 @@ export const useFiltersParams = (id?: string): FilterParams => {
 		if (lastCategoryId.current != id) {
 			clearIngredients();
 			setSortType(searchParams.get('sort') as sortType || '');
+			setOnlyInHave(!!searchParams.get('in_have') || false);
 			setPage(Number(searchParams.get('page')) || 1);
 			lastCategoryId.current = id;
 		}
@@ -68,11 +72,13 @@ export const useFiltersParams = (id?: string): FilterParams => {
 			selectedIngredients,
 			page,
 			sortType,
+			onlyInHave,
 			setPrices: updatePrices,
 			setSelectedIngredients: toggleIngredients,
 			setPage,
-			setSortType
+			setSortType,
+			setOnlyInHave,
 		}),
-		[prices, selectedIngredients, page, sortType],
+		[prices, selectedIngredients, page, sortType, onlyInHave],
 	);
 };

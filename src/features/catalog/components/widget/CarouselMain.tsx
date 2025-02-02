@@ -29,7 +29,6 @@ const sliders = [
 export const CarouselMain: React.FC<Props> = ({ className }) => {
 
 	return (
-		// <Container className={cn('w-[1060px] pt-3', className)}>
 		<Container className={cn('w-[1092px] pt-3', className)}>
 			<Carousel
 				plugins={[

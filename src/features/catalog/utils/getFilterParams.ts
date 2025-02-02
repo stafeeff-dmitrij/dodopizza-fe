@@ -7,6 +7,7 @@ export interface ReturnProps {
 	max_price?: number;
 	ingredients?: string[];
 	sort?: sortType;
+	in_have?: true;
 	page: number;
 	page_size?: number;
 }
@@ -35,6 +36,9 @@ export const getFilterParams = (filters: Filters, category_id?: string, pageSize
 	}
 	if (filters.sortType) {
 		params.sort = filters.sortType;
+	}
+	if (filters.onlyInHave) {
+		params.in_have = filters.onlyInHave;
 	}
 	if (pageSize) {
 		params.page_size = pageSize;

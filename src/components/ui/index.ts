@@ -4,6 +4,7 @@ export { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } 
 export { Input } from './input';
 export { Skeleton } from './skeleton.tsx';
 export { Slider } from './slider.tsx';
+export { Switch } from './switch.tsx';
 export {
 	Pagination,
 	PaginationContent,

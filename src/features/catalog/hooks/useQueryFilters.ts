@@ -9,6 +9,7 @@ export interface Filters {
 	prices: PriceRangeProps;
 	selectedIngredients: Set<string>;
 	sortType: sortType | undefined;
+	onlyInHave: boolean;
 	page: number;
 }
 
