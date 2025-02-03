@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useIntersection } from 'react-use';
 
-import { AppDispatch } from '../../../../redux/store.ts';
-import { setActiveCategoryId } from '../../../../redux/slices/categorySlice.ts';
-import { Title } from '../../../../components/typography';
-import { ProductsList } from './ProductsList.tsx';
-import { Product } from '../../../../redux/api/productApi.ts';
-import { cn } from '../../../../lib';
-import { Button } from '../../../../components/ui';
+import { AppDispatch } from '../../../../../redux/store.ts';
+import { setActiveCategoryId } from '../../../../../redux/slices/categorySlice.ts';
+import { Title } from '../../../../../components/typography';
+import { ProductsList } from '../ProductsList/ProductsList.tsx';
+import { Product } from '../../../../../redux/api/productApi.ts';
+import { cn } from '../../../../../lib';
+import { Button } from '../../../../../components/ui';
 import { ChevronRight } from 'lucide-react';
 
 

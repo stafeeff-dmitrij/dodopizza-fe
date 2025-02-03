@@ -19,7 +19,8 @@ export const MainMenuSkeleton: React.FC<Props> = ({ className }) => {
 					<Skeleton
 						key={index}
 						className={'h-5 w-16'}
-					/>)
+					/>
+				)
 			}
 		</div>
 	);

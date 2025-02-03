@@ -15,7 +15,7 @@ export function Layout() {
 		<>
 			<TopBar/>
 			<Header hasSearch={true}/>
-			<MainMenu/>
+			<MainMenu className='mb-3'/>
 			<Outlet/>
 			<ProductModal/>
 		</>

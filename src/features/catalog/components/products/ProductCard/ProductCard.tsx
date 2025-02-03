@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Title } from '../../../../components/typography';
-import { Button } from '../../../../components/ui';
+import { Title } from '../../../../../components/typography';
+import { Button } from '../../../../../components/ui';
 
-import { AppDispatch } from '../../../../redux/store.ts';
-import { Product } from '../../../../redux/api/productApi.ts';
-import { setActiveModal } from '../../../../redux/slices/productModalSlice.ts';
-import { cn } from '../../../../lib';
-import { addProductToCart } from '../../../product/utils';
+import { AppDispatch } from '../../../../../redux/store.ts';
+import { Product } from '../../../../../redux/api/productApi.ts';
+import { setActiveModal } from '../../../../../redux/slices/productModalSlice.ts';
+import { cn } from '../../../../../lib';
+import { addProductToCart } from '../../../../product/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
@@ -21,7 +21,7 @@ interface Props {
  * @component
  * @description Карточка товара
  *
- * @prop {Product} product - товар
+ * @prop product - товар
  */
 export const ProductCard: React.FC<Props> = ({ product, className }) => {
 

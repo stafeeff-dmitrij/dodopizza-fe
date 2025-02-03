@@ -2,9 +2,10 @@ import React from 'react';
 import { useTitle } from 'react-use';
 
 import { Container } from '../../components/layout';
-import { CarouselMain, ProductsGroupList } from '../../features/catalog/components';
+import { CarouselMain, NotResults, ProductsGroupList } from '../../features/catalog/components';
 import { useGetAllProductsQuery } from '../../redux/api';
 import { getErrorToast } from '../../lib';
+import { ProductsGroupListSkeleton } from '../../features/catalog/components/products';
 
 
 /**
@@ -25,22 +26,24 @@ export function Main() {
 
 	return (
 		<div>
-			<CarouselMain/>
-			<Container className="flex gap-[80px] mt-5 pb-14">
-				<div className="flex-1">
-					<div className="flex flex-col gap-16">
-						{isLoading && <p>Идет загрузка</p> }
-						{isSuccess && data.map(category => (
-							category.products.length > 0 && (
-								<ProductsGroupList
-									key={category.id}
-									categoryId={category.id}
-									title={category.name}
-									products={category.products}
-								/>
-							)
-						))}
-					</div>
+			<CarouselMain className='mb-5'/>
+			<Container className="flex gap-[80px] pb-14">
+				<div className="flex flex-col flex-1 gap-10">
+					{isLoading && [...Array(3)].map((_, index) =>
+							<ProductsGroupListSkeleton key={index}/>
+						)
+					}
+					{isSuccess && !data.length && <NotResults className='h-[300px]'/>}
+					{isSuccess && data.map(category => (
+						category.products.length > 0 && (
+							<ProductsGroupList
+								key={category.id}
+								categoryId={category.id}
+								title={category.name}
+								products={category.products}
+							/>
+						)
+					))}
 				</div>
 			</Container>
 		</div>
