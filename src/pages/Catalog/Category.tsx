@@ -5,15 +5,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Title } from '../../components/typography';
 import { Container } from '../../components/layout';
-import { FiltersBlock, NotResults, ProductsList, SelectSort } from '../../features/catalog/components';
+import {
+	FiltersBlock,
+	NotResults,
+	PaginationProductSkeleton,
+	ProductsList,
+	SelectSort
+} from '../../features/catalog/components';
 
 import { AppDispatch } from '../../redux/store.ts';
 import { selectCategory, setActiveCategoryId } from '../../redux/slices/categorySlice.ts';
 import { useGetFilterProductsQuery } from '../../redux/api';
 import { getErrorToast } from '../../lib';
-import { PaginationProduct } from '../../features/catalog/components/PaginationProduct.tsx';
+import { PaginationProduct } from '../../features/catalog/components';
 import { useFiltersParams, useQueryFilters } from '../../features/catalog/hooks';
 import { getFilterParams } from '../../features/catalog/utils';
+import { Skeleton } from '../../components/ui';
+import { ProductListSkeleton } from '../../features/catalog/components/products';
 
 
 /**
@@ -59,18 +67,24 @@ export function Category() {
 				<div className="flex flex-col justify-between w-full">
 					<div className="flex justify-between items-center gap-x-8 mb-12">
 						<div className="flex items-center gap-1">
-							{foundCategory && <Title text={foundCategory.name} size="lg" className="text-3xl"/>}
+							{isLoading && <Skeleton className={'h-9 w-36 rounded-3xl'}/>}
+							{!isLoading && foundCategory && <Title text={foundCategory.name} size="lg" className="text-3xl"/>}
 							{data?.results && data.results.length > 0 && <span className='text-[18px]'>({data.count})</span>}
 						</div>
 						<SelectSort
 							value={filters.sortType}
 							setValue={filters.setSortType}
-							disabled={data?.results.length === 0}
+							disabled={!isSuccess || data?.results.length === 0}
 						/>
 					</div>
-					{isLoading && <p>Идет загрузка...</p>}
-					{isSuccess && data.results.length > 0 && <ProductsList products={data.results} className="grid-cols-3 gap-x-6 pb-8"/>}
+
+					{/* результат с товарами */}
+					{isLoading && <ProductListSkeleton className='grid-cols-3 gap-x-6 pb-8' count={6}/>}
 					{isSuccess && data.results.length === 0 && <NotResults/>}
+					{isSuccess && data.results.length > 0 && <ProductsList products={data.results} className="grid-cols-3 gap-x-6 pb-8"/>}
+
+					{/* пагинация */}
+					{isLoading && <PaginationProductSkeleton className='pt-6 pb-6 border-t border-slate-100'/>}
 					{isSuccess && data.total_pages !== 1 && data.results.length > 0 &&
 						<PaginationProduct
 							className='pt-6 pb-6 border-t border-slate-100'

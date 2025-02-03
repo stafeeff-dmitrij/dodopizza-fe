@@ -5,3 +5,4 @@ export { ProductCard } from './products';
 export { SelectSort } from './SelectSort.tsx';
 export { NotResults } from './NotResults.tsx';
 export * from './filters';
+export * from './PaginationProduct';

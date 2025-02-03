@@ -7,7 +7,7 @@ import {
 	PaginationItem,
 	PaginationLink, PaginationNext,
 	PaginationPrevious
-} from '../../../components/ui';
+} from '../../../../components/ui';
 
 
 interface Props {
