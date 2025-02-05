@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { cn, formatPrice } from '../../../../lib';
-import { Ingredient, Variation } from '../../../../redux/api/productApi.ts';
+import { Variation } from '../../../../redux/api/productApi.ts';
 import { Title } from '../../../../components/typography';
 import { IngredientCard, PizzaImage, VariationsGroup } from '../index.ts';
 import { Button } from '../../../../components/ui';
@@ -14,6 +14,7 @@ import {
 } from '../../utils';
 import { usePizzaOptions } from '../../hooks';
 import { Variant } from '../ProductDetail/VariationsGroup.tsx';
+import { Ingredient } from '../../../../redux/api/ingredientsApi.ts';
 
 
 export interface PizzaVariation extends Variation {
@@ -42,8 +43,8 @@ export interface Props {
  * @prop count - кол-во товара
  * @prop default_ingredients - ингредиенты по умолчанию, доступные для данного товара
  * @prop variations - вариации товара
- * @prop onSubmit - добавление товара в корзину
  * @prop loading - статус загрузки
+ * @prop onSubmit - добавление товара в корзину
  */
 export const ChoicePizzaForm: React.FC<Props> = ({
 	name,
@@ -51,8 +52,8 @@ export const ChoicePizzaForm: React.FC<Props> = ({
 	count,
 	variations,
   default_ingredients,
+  loading,
   onSubmit,
-	loading,
 	className
 }) => {
 

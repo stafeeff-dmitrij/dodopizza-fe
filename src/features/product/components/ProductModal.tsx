@@ -23,7 +23,7 @@ export const ProductModal: React.FC<Props> = ({ className }) => {
 
 	const navigate = useNavigate();
 
-	const { openModal, activeProduct } = useSelector(selectActiveProduct);
+	const { openModal, loading, activeProduct } = useSelector(selectActiveProduct);
 	const dispatch = useDispatch<AppDispatch>()
 
 	// закрытие модального окна с товаром
@@ -50,8 +50,12 @@ export const ProductModal: React.FC<Props> = ({ className }) => {
 
 	return (
 		<Dialog open={openModal} onOpenChange={() => onCloseModalClick()}>
+			{/*
+				Вместо лоадера для разных типов модалок просто не выводим модалку, пока идет загрузка детальной информации о товаре - loading.
+				В противном случае размеры модалки скачут до и после загрузки данных о товаре.
+			*/}
 			<DialogContent
-				className={cn('inline-table p-0 sm:rounded-[20px] overflow-hidden', className)}
+				className={cn('inline-table p-0 sm:rounded-[20px] overflow-hidden', [{'hidden': loading}], className)}
 			>
 				<ProductForm productId={activeProduct.id} closeModal={onCloseModalClick} />
 				{/* визуально скрываем заголовок и описание (обязательны внутри DialogContent) */}

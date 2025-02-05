@@ -2,11 +2,14 @@ import React from 'react';
 
 import { useGetDetailProductQuery, Variation } from '../../../../redux/api/productApi.ts';
 import { ChoicePizzaForm, PizzaVariation } from './ChoicePizzaForm.tsx';
-import { ChoiceProductForm } from './ChoiceProductForm.tsx';
+import { ChoiceProductForm } from './ChoiceProductForm';
 import { CategoriesId } from '../../constants.ts';
 import { getErrorToast } from '../../../../lib';
 import { useNavigate } from 'react-router-dom';
 import { addProductToCart } from '../../utils';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../../redux/store.ts';
+import { setLoadingStatus } from '../../../../redux/slices/productModalSlice.ts';
 
 
 interface Props {
@@ -18,12 +21,13 @@ interface Props {
  * @component
  * @description Форма выбора товара - возвращает форму нужного типа в зависимости от категории выобранного товара
  *
- * @prop {number} productId - id товара
- * @prop {function} closeModal - функция закрытия модального окна
+ * @prop productId - id товара
+ * @prop closeModal - функция закрытия модального окна
  */
 export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch<AppDispatch>()
 
 	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: productId });
 
@@ -32,6 +36,12 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 		await addProductToCart(data!, variationId, ingredientsId);
 		closeModal?.();
 	};
+
+	React.useEffect(() => {
+		if (isSuccess) {
+			dispatch(setLoadingStatus(false));
+		}
+	}, [data, isSuccess])
 
 	if (isError) {
 		navigate('/');
@@ -47,8 +57,8 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 				count={data.count}
 				variations={data.variations as PizzaVariation[]}
 				default_ingredients={data.default_ingredients}
-				onSubmit={onSubmit}
 				loading={isLoading}
+				onSubmit={onSubmit}
 			/>
 		} else if (data.category_id === CategoriesId.combo) {
 			return <p>Форма для комбо товаров еще не готова</p>
@@ -61,8 +71,8 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 				description={data.description}
 				count={data.count}
 				variations={data.variations as Variation[]}
-				onSubmit={onSubmit}
 				loading={isLoading}
+				onSubmit={onSubmit}
 			/>
 		}
 	}

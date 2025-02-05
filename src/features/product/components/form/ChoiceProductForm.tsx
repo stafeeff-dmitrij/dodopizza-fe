@@ -21,8 +21,8 @@ export interface Props {
 	description: string,
 	count: number,
 	variations: VariationProps[],
-	onSubmit: (variationId: number, ingredientsId: number[]) => void;
 	loading: boolean;
+	onSubmit: (variationId: number, ingredientsId: number[]) => void;
 	className?: string;
 }
 
@@ -36,8 +36,8 @@ export interface Props {
  * @prop description - описание товара
  * @prop count - кол-во товара
  * @prop variations - вариации товара
- * @prop onSubmit - добавление товара в корзину
  * @prop loading - статус загрузки
+ * @prop onSubmit - добавление товара в корзину
  */
 export const ChoiceProductForm: React.FC<Props> = ({
 	size = 'small',
@@ -121,7 +121,7 @@ export const ChoiceProductForm: React.FC<Props> = ({
 										price={ingredient.price}
 										image={ingredient.image}
 										onClick={() => addIngredient(ingredient.id)}
-										// // проверка id текущего ингредиента в selectedIngredientsId
+										// проверка id текущего ингредиента в selectedIngredientsId
 										active={selectedIngredientsId.has(ingredient.id)}
 									/>
 								))}

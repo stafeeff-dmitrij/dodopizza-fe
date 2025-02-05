@@ -63,7 +63,7 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 			<div className="flex justify-between items-center">
 				{product.count > 0 &&
 					<span className="text-[16px] font-semibold">
-						{product.variation_have && 'от '}
+						{product.variations_have && 'от '}
 							<b>{product.min_price} ₽</b>
 					</span>
 				}
@@ -71,9 +71,9 @@ export const ProductCard: React.FC<Props> = ({ product, className }) => {
 					<Button
 						className="px-7 py-2 text-[16px] font-normal"
 						variant="secondary"
-						onClick={product.variation_have ? onClick : onAddProductToCartClick}
+						onClick={product.variations_have ? onClick : onAddProductToCartClick}
 					>
-						{product.variation_have ? 'Выбрать' : 'В корзину'}
+						{product.variations_have ? 'Выбрать' : 'В корзину'}
 					</Button>
 				}
 				{product.count === 0 &&

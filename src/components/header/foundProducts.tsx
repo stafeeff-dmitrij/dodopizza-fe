@@ -54,7 +54,7 @@ export const FoundProducts: React.FC<Props> = ({ loading, focused, products, cle
 						<img className="w-10 aspect-square rounded-sm" src={product.image} alt={product.name} />
 						<span className='text-[15px]'>{product.name}</span>
 						<span className="ml-auto text-[13px]">
-								{product.variation_have && 'от '}
+								{product.variations_have && 'от '}
 							<b className="text-[15px]">{product.min_price} ₽</b>
 							</span>
 					</Link>

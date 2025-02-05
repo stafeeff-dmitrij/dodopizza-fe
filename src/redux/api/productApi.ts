@@ -32,7 +32,7 @@ export interface Product {
 	description: string,
 	image: string,
 	min_price: number,
-	variation_have: boolean,
+	variations_have: boolean,
 	count: number,
 }
 
