@@ -29,7 +29,7 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>()
 
-	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: productId });
+	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: productId });
 
 	// добавление товара в корзину
 	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
@@ -44,9 +44,10 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 	}, [data, isSuccess])
 
 	if (isError) {
+		getErrorToast('Ошибка при получении данных о товаре');
+		dispatch(setLoadingStatus(false));
+		closeModal?.();
 		navigate('/');
-		getErrorToast('Произошла ошибка при получении данных о товаре');
-		console.error(error);
 	}
 
 	if (isSuccess) {

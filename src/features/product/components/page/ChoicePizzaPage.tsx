@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { cn, formatPrice } from '../../../../lib';
-import { Ingredient, Variation } from '../../../../redux/api/productApi.ts';
+import { Variation } from '../../../../redux/api/productApi.ts';
 import { Title } from '../../../../components/typography';
 import { IngredientCard, PizzaImage, VariationsGroup } from '../index.ts';
 import { Button } from '../../../../components/ui';
@@ -17,6 +17,7 @@ import { Variant } from '../ProductDetail/VariationsGroup.tsx';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../redux/store.ts';
 import { setActiveCategoryId } from '../../../../redux/slices/categorySlice.ts';
+import { Ingredient } from '../../../../redux/api/ingredientsApi.ts';
 
 
 export interface PizzaVariation extends Variation {
@@ -33,7 +34,6 @@ export interface Props {
 	default_ingredients: Ingredient[],
 	variations: PizzaVariation[],
 	onSubmit: (variationId: number, ingredientsId: number[]) => void;
-	loading: boolean;
 	className?: string;
 }
 
@@ -48,7 +48,6 @@ export interface Props {
  * @prop default_ingredients - ингредиенты по умолчанию, доступные для данного товара
  * @prop variations - вариации товара
  * @prop onSubmit - добавление товара в корзину
- * @prop loading - статус загрузки
  */
 export const ChoicePizzaPage: React.FC<Props> = ({
 	categoryId,
@@ -58,7 +57,6 @@ export const ChoicePizzaPage: React.FC<Props> = ({
 	variations,
   default_ingredients,
   onSubmit,
-	loading,
 	className
 }) => {
 
@@ -97,9 +95,11 @@ export const ChoicePizzaPage: React.FC<Props> = ({
 
 	return (
 		<div className={cn('flex flex-1 w-full h-[700px] gap-x-6', className)}>
-			<PizzaImage className='w-[520px] bg-[#fffcf8] rounded-3xl' imageUrl={activeVariation.image} alt={name} size={activeVariation.pizza_size}/>
+			<PizzaImage
+				className="w-[520px] bg-[#fffcf8] rounded-3xl" imageUrl={activeVariation.image} alt={name}
+				size={activeVariation.pizza_size}
+			/>
 			<div className='flex flex-col justify-between pt-5 rounded-[20px]'>
-				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
 				<div className="w-[410px] px-[30px] overflow-auto">
 					<Title text={name} size="xl" className="mb-1 text-[28px] leading-8 font-normal"/>
 					<p className="mb-2 pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
@@ -137,7 +137,6 @@ export const ChoicePizzaPage: React.FC<Props> = ({
 						variant={count === 0 ? 'block' : 'default'}
 						disabled={count === 0}
 						title={count === 0 ? 'Товар закончился' : ''}
-						loading={loading}
 						onClick={handleClickAdd}
 						className="px-9 py-6 text-base font-light w-full"
 					>
