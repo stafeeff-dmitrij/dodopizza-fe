@@ -24,7 +24,6 @@ export interface Props {
 	count: number,
 	variations: VariationProps[],
 	onSubmit: (variationId: number, ingredientsId: number[]) => void;
-	loading: boolean;
 	className?: string;
 }
 
@@ -38,7 +37,6 @@ export interface Props {
  * @prop count - кол-во товара
  * @prop variations - вариации товара
  * @prop onSubmit - добавление товара в корзину
- * @prop loading - статус загрузки
  */
 export const ChoiceProductPage: React.FC<Props> = ({
 	categoryId,
@@ -47,7 +45,6 @@ export const ChoiceProductPage: React.FC<Props> = ({
 	count,
 	variations,
 	onSubmit,
-	loading,
 	className
 }) => {
 
@@ -96,7 +93,6 @@ export const ChoiceProductPage: React.FC<Props> = ({
 				alt={name}
 			/>
 			<div className='flex flex-col justify-between pt-[30px]'>
-				{/* scrollbar - свой кастомный скролл, описанный в globals.css */}
 				<div className="w-[410px] px-[30px] overflow-auto">
 					<Title text={name} size="xl" className="mb-1 text-[28px] leading-8 font-normal"/>
 					<p className="mb-2 pt-[1px] text-[14px] font-light text-[#5c6370]">{shortDescription}</p>
@@ -137,7 +133,6 @@ export const ChoiceProductPage: React.FC<Props> = ({
 						variant={count === 0 ? 'block' : 'default'}
 						disabled={count === 0}
 						title={count === 0 ? 'Товар закончился' : ''}
-						loading={loading}
 						onClick={handleClickAdd}
 						className="px-9 py-6 text-base font-light w-full"
 					>

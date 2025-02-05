@@ -6,6 +6,7 @@ import { cn, getErrorToast } from '../../../lib';
 import { ProductsList } from '../../catalog/components';
 import { Product } from '../../../redux/api/productApi.ts';
 import { getShuffleArray } from '../../catalog/utils';
+import { ProductListSkeleton } from '../../catalog/components/products';
 
 
 interface Props {
@@ -30,8 +31,7 @@ export const RecommendationProducts: React.FC<Props> = ({
 	className,
 }) => {
 
-	const { data, isLoading, isSuccess, isError, error } = useGetFilterProductsQuery({ category_id: categoryId, page_size: count });
-
+	const { data, isLoading, isSuccess, isError } = useGetFilterProductsQuery({ category_id: String(categoryId), page_size: count });
 	const [products, setProducts] = useState<Product[]>([]);
 
 	// случайное перемешивание товаров + убрать из перечня товаров товар с указанным id
@@ -48,24 +48,17 @@ export const RecommendationProducts: React.FC<Props> = ({
 	}, [data?.results, ignoreProductId])
 
 	if (isError) {
-		getErrorToast('Произошла ошибка!');
-		console.error(error);
+		getErrorToast('Произошла ошибка при получении рекомендаций к товару');
 	}
 
-	// TODO Добавить лоадер
-	if (isLoading) {
-		return <p>Идет загрузка...</p>
-	}
-
-	if (isSuccess) {
-		return (
-			<div className={className}>
-				<Title text='Рекомендации' size='lg' className='mb-6 text-[24px]' />
-				<ProductsList
-					products={products.slice(0, count)}
-					className={cn('grid-flow-col gap-10 overflow-auto pb-6', products.length >= 4 && `grid-cols-${count}`)}
-				/>
-			</div>
-		);
-	}
+	return (
+		<div className={className}>
+			<Title text='Рекомендации' size='lg' className='mb-6 text-[24px]' />
+			{isLoading && <ProductListSkeleton count={4} className='gap-x-10 pb-6'/>}
+			{isSuccess && <ProductsList
+				products={products.slice(0, count)}
+				className={cn('grid-flow-col gap-10 overflow-auto pb-6', products.length >= 4 && `grid-cols-${count}`)}
+			/>}
+		</div>
+	);
 }
