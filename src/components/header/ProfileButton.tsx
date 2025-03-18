@@ -18,11 +18,11 @@ interface Props {
  */
 export const ProfileButton: React.FC<Props> = ({ className, onClickSignIn }) => {
 
-	const session = false;  // статус авторизации
+	const authorized = false;  // статус авторизации
 
 	return (
 		<div className={className}>
-			{!session ? (
+			{!authorized ? (
 				<Button onClick={onClickSignIn} variant="gray" className="flex items-center gap-1 px-6">
 					Войти
 				</Button>

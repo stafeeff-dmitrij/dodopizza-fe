@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Title } from '../../../components/typography';
 import { useGetFilterProductsQuery } from '../../../redux/api';
-import { cn, getErrorToast } from '../../../lib';
+import { cn } from '../../../lib';
 import { ProductsList } from '../../catalog/components';
 import { Product } from '../../../redux/api/productApi.ts';
 import { getShuffleArray } from '../../catalog/utils';
@@ -48,7 +48,7 @@ export const RecommendationProducts: React.FC<Props> = ({
 	}, [data?.results, ignoreProductId])
 
 	if (isError) {
-		getErrorToast('Произошла ошибка при получении рекомендаций к товару');
+		return null;
 	}
 
 	return (

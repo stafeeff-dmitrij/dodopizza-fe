@@ -32,14 +32,14 @@ const router = createBrowserRouter([
 						element: <Profile />,
 					},
 					{
-						path: 'not-allowed',
-						element: <NotAllowed />
-					},
-					{
 						path: '*',
 						element: <NotFound />
 					}
 				],
+			},
+			{
+				path: 'not-allowed',
+				element: <NotAllowed />
 			},
 			{
 				path: '/order',

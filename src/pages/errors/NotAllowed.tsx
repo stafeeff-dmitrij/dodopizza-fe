@@ -1,17 +1,24 @@
+import React from 'react';
+
 import { LockBlock } from '../../components/layout';
+import { cn } from '../../lib';
+
+interface Props {
+  className?: string;
+}
 
 /**
  * @component
- * @description Страница заглушка, когда нет доступа
+ * @description Страница заглушка, когда нет доступа к сайту
  */
-export function NotAllowed() {
-	return (
-		<div className='flex flex-col items-center justify-center h-[80vh]'>
-			<LockBlock
-				title='Доступ запрещен'
-				description='Данную страницу могут просматривать только авторизованные пользователи'
-				imageUrl='/images/locked.svg'
-			/>
-		</div>
-	);
-}
+export const NotAllowed: React.FC<Props> = ({ className }) => {
+  return (
+    <div className={cn('flex flex-col items-center justify-center h-screen', className)}>
+      <LockBlock
+        title="Доступ запрещен"
+        description="Доступ к ресурсу ограничен, запросите доступ для просмотра сайта."
+        imageUrl="/images/locked.svg"
+      />
+    </div>
+  );
+};

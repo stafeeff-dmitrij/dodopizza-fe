@@ -1,15 +1,21 @@
 import { LockBlock } from '../../components/layout';
+import React from 'react';
+import { cn } from '../../lib';
+
+interface Props {
+	className?: string;
+}
 
 /**
  * @component
  * @description Страница 404
  */
-export function NotFound() {
+export const NotFound: React.FC<Props> = ({ className }) => {
 	return (
-		<div className='flex flex-col items-center justify-center h-[80vh]'>
+		<div className={cn('flex flex-col items-center justify-center h-[70vh]', className)}>
 			<LockBlock
 				title='Страница не найдена'
-				description='Проверьте корректность введённого адреса или повторите попытку позже'
+				description='Проверьте корректность введённого адреса или повторите попытку позже.'
 				imageUrl='/images/404.svg'
 			/>
 		</div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { ErrorPage } from '../pages/errors';
+import { ErrorRender } from '../pages/errors';
 
 
 interface ErrorBoundaryState {
@@ -28,12 +28,13 @@ class ErrorBoundary extends Component<MyComponentProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    // TODO Логировать ошибку с уведомлением!
     console.error('Error caught:', error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return <ErrorPage/>;
+      return <ErrorRender/>;
     }
 
     return this.props.children;
