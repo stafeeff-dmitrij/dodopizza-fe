@@ -1,4 +1,4 @@
-import { LockBlock } from '../components/layout';
+import { LockBlock } from '../../components/layout';
 
 /**
  * @component

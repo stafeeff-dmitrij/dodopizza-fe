@@ -31,7 +31,7 @@ export const LockBlock: React.FC<React.PropsWithChildren<Props>> = ({ title, des
   };
 
   return <div className={cn('flex items-center gap-20', className)}>
-    <div className='flex flex-col items-start max-w-[430px]'>
+    <div className='flex flex-col items-start max-w-[480px]'>
       <Title text={title} size="xl" />
       <p className="mb-5 text-[14px] leading-[18px] text-muted-foreground text-justify">
         {description}

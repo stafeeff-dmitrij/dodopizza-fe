@@ -8,7 +8,7 @@ import { PizzaVariation } from '../../features/product/components/form/ChoicePiz
 import { addProductToCart } from '../../features/product/utils';
 import { ChoicePizzaPage, ChoiceProductPage, ProductPageSkeleton } from '../../features/product/components/page';
 import { RecommendationProducts } from '../../features/product/components';
-import { NotFound } from '../NotFound.tsx';
+import { NotFound } from '../errors/NotFound.tsx';
 
 
 /**
