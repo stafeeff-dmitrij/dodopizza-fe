@@ -1,4 +1,4 @@
-import { Title } from '../components/typography/Title.tsx';
+import { LockBlock } from '../components/layout';
 
 /**
  * @component
@@ -6,8 +6,12 @@ import { Title } from '../components/typography/Title.tsx';
  */
 export function NotAllowed() {
 	return (
-		<div>
-			<Title text="Доступ запрещен!" size="xl" />
+		<div className='flex flex-col items-center justify-center h-[80vh]'>
+			<LockBlock
+				title='Доступ запрещен'
+				description='Данную страницу могут просматривать только авторизованные пользователи'
+				imageUrl='/images/locked.svg'
+			/>
 		</div>
 	);
 }
