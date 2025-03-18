@@ -1,4 +1,4 @@
-import { Title } from '../components/typography/Title.tsx';
+import { LockBlock } from '../components/layout';
 
 /**
  * @component
@@ -6,8 +6,12 @@ import { Title } from '../components/typography/Title.tsx';
  */
 export function NotFound() {
 	return (
-		<div>
-			<Title text="Ничего не найдено :(" size="xl" />
+		<div className='flex flex-col items-center justify-center h-[80vh]'>
+			<LockBlock
+				title='Страница не найдена'
+				description='Проверьте корректность введённого адреса или повторите попытку позже'
+				imageUrl='/images/404.svg'
+			/>
 		</div>
 	);
 }

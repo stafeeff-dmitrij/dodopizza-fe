@@ -8,6 +8,7 @@ import { PizzaVariation } from '../../features/product/components/form/ChoicePiz
 import { addProductToCart } from '../../features/product/utils';
 import { ChoicePizzaPage, ChoiceProductPage, ProductPageSkeleton } from '../../features/product/components/page';
 import { RecommendationProducts } from '../../features/product/components';
+import { NotFound } from '../NotFound.tsx';
 
 
 /**
@@ -18,7 +19,7 @@ export function Product() {
 
 	const navigate = useNavigate();
 	const { id } = useParams();
-	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: Number(id) });
+	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: Number(id) });
 
 	// добавление товара в корзину
 	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
@@ -26,6 +27,9 @@ export function Product() {
 	};
 
 	if (isError) {
+		if ('status' in error && error.status === 404) {
+			return <NotFound/>;
+		}
 		getErrorToast('Ошибка при получении данных о товаре');
 		navigate('/');
 	}

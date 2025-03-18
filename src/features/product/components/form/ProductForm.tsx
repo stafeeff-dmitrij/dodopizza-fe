@@ -10,6 +10,7 @@ import { addProductToCart } from '../../utils';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../redux/store.ts';
 import { setLoadingStatus } from '../../../../redux/slices/productModalSlice.ts';
+import { NotFound } from '../../../../pages';
 
 
 interface Props {
@@ -29,7 +30,7 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>()
 
-	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: productId });
+	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: productId });
 
 	// добавление товара в корзину
 	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
@@ -44,6 +45,9 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 	}, [data, isSuccess])
 
 	if (isError) {
+		if ('status' in error && error.status === 404) {
+			return <NotFound/>;
+		}
 		getErrorToast('Ошибка при получении данных о товаре');
 		dispatch(setLoadingStatus(false));
 		closeModal?.();
