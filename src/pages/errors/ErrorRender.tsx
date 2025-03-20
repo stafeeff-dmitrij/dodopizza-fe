@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { LockBlock } from '../../components/layout';
 import { cn } from '../../lib';
+import { LockBlock } from '../../components/layout';
 
 
 interface Props {

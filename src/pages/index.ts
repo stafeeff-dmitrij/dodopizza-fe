@@ -1,7 +1,7 @@
-export { Main } from './Catalog/Main.tsx';
-export { Category } from './Catalog/Category.tsx';
-export { Product } from './Catalog/Product.tsx';
+export { Main } from './catalog/Main.tsx';
+export { Category } from './catalog/Category.tsx';
+export { Product } from './catalog/Product.tsx';
 export { Profile } from './Profile.tsx';
-export { Checkout } from './Order/Checkout.tsx';
-export { Orders } from './Order/Orders.tsx';
+export { Checkout } from './order/Checkout.tsx';
+export { Orders } from './order/Orders.tsx';
 export { NotFound, NotAllowed } from './errors';

@@ -1,6 +1,8 @@
-import { LockBlock } from '../../components/layout';
 import React from 'react';
+
 import { cn } from '../../lib';
+import { LockBlock } from '../../components/layout';
+
 
 interface Props {
 	className?: string;
