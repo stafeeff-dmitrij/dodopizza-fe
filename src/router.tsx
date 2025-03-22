@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from './App.tsx';
-import { Layout as CatalogLayout } from './pages/Catalog/Layout.tsx';
-import { Layout as OrderLayout } from './pages/Order/Layout.tsx';
+import { Layout as CatalogLayout } from './pages/catalog/Layout.tsx';
+import { Layout as OrderLayout } from './pages/order/Layout.tsx';
 import { Main, Checkout, NotAllowed, NotFound, Orders, Product, Profile, Category } from './pages';
 
 
@@ -32,14 +32,14 @@ const router = createBrowserRouter([
 						element: <Profile />,
 					},
 					{
-						path: 'not-allowed',
-						element: <NotAllowed />
-					},
-					{
 						path: '*',
 						element: <NotFound />
 					}
 				],
+			},
+			{
+				path: 'not-allowed',
+				element: <NotAllowed />
 			},
 			{
 				path: '/order',

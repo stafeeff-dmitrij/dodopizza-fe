@@ -19,7 +19,9 @@ interface Props {
  */
 export const MainMenu: React.FC<Props> = ({ className }) => {
 
-	const { data, isLoading, isSuccess } = useGetCategoriesQuery();
+	const authorized = true;  // статус авторизации
+
+	const { data, isLoading, isSuccess, isError } = useGetCategoriesQuery();
 
 	const [isSticky, setIsSticky] = useState(false);
 	const menuRef = useRef<HTMLElement>(null);
@@ -39,6 +41,10 @@ export const MainMenu: React.FC<Props> = ({ className }) => {
 		};
 	}, []);
 
+	if (isError) {
+		return null;
+	}
+
 	return (
 		<nav
 			className={cn(
@@ -52,13 +58,13 @@ export const MainMenu: React.FC<Props> = ({ className }) => {
 		>
 			<Container className="flex items-center justify-between gap-14">
 				{isLoading && <MainMenuSkeleton/>}
-				{isSuccess &&
+				{isSuccess && data.length > 0 &&
 					<div className="flex items-center gap-4">
 						<LogoImg className={cn({ 'hidden': !isSticky })} size="36px"/>
 						<Categories categories={data}/>
 					</div>
 				}
-				<CartButton/>
+				{authorized && <CartButton/>}
 			</Container>
 		</nav>
 	);

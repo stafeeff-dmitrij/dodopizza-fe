@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { ScrollToTop } from './components/ScrollToTop.ts';
+import { ScrollToTop } from './components/ScrollToTop.tsx';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
 
 import './styles/styles.scss';
 
@@ -9,7 +10,9 @@ function App() {
 	return (
 		<>
 			<ScrollToTop/>
-			<Outlet/>
+			<ErrorBoundary>
+				<Outlet/>
+			</ErrorBoundary>
 		</>
 	);
 }

@@ -24,7 +24,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// TODO Вынести в утилиты
 /**
  * @function
  * @description Добавление пробела между разрядами стоимости

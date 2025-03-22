@@ -1,5 +1,8 @@
 import toast from 'react-hot-toast';
 
+
+const DURATION = 3000;
+
 /**
  * @function
  * @description Вывод уведомления, что страница еще не готова
@@ -16,11 +19,9 @@ export function getNotReadyToast() {
  * @function
  * @description Вывод уведомления об ошибке
  */
-export function getErrorToast(message: string) {
+export function getErrorToast(message: string, duration: number = DURATION) {
 	setTimeout(() => {
-		toast.error(message, {
-			duration: 3000,
-		});
+		toast.error(message, {duration});
 	}, 200);
 }
 
@@ -28,10 +29,8 @@ export function getErrorToast(message: string) {
  * @function
  * @description Вывод успешного уведомления
  */
-export function getSuccessToast(message: string) {
+export function getSuccessToast(message: string, duration: number = DURATION) {
 	setTimeout(() => {
-		toast.success(message, {
-			duration: 3000,
-		});
+		toast.success(message, {duration});
 	}, 200);
 }
