@@ -28,6 +28,7 @@ export const ErrorPage: React.FC<Props> = ({ error }) => {
   if ('status' in error && error.status === HTTP_STATUS.UNAUTHORIZED) {
     return <NotAuthorized/>;
   } else if ('status' in error && error.status === HTTP_STATUS.FORBIDDEN) {
+    console.error('Доступ ограничен');
     dispatch(baseApi.util.resetApiState());  // сброс кэша RTQ
     return <Navigate to="not-allowed" replace />;
   } else if ('status' in error && error.status === HTTP_STATUS.NOT_FOUND) {
