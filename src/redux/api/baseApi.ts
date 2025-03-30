@@ -22,15 +22,3 @@ export const baseApi = createApi({
 	tagTypes: ['categories', 'ingredients', 'all_products', 'products', 'product_detail'],
 	endpoints: () => ({}),
 });
-
-// export const baseApi = createApi({
-// 	reducerPath: 'api',
-// 	baseQuery: fetchBaseQuery({
-// 		baseUrl: `${envVariables.BASE_URL}`,
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 	}),
-// 	tagTypes: ['categories', 'ingredients', 'all_products', 'products', 'product_detail'],
-// 	endpoints: () => ({}),
-// });
