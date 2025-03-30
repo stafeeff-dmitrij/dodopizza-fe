@@ -1,13 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { Container } from '../../components/layout';
 import { useGetDetailProductQuery, Variation } from '../../redux/api/productApi.ts';
-import { getErrorToast } from '../../lib';
 import { CategoriesId } from '../../features/product/constants.ts';
 import { PizzaVariation } from '../../features/product/components/form/ChoicePizzaForm.tsx';
 import { addProductToCart } from '../../features/product/utils';
 import { ChoicePizzaPage, ChoiceProductPage, ProductPageSkeleton } from '../../features/product/components/page';
 import { RecommendationProducts } from '../../features/product/components';
+import { ErrorPage } from '../errors';
 
 
 /**
@@ -16,9 +16,8 @@ import { RecommendationProducts } from '../../features/product/components';
  */
 export function Product() {
 
-	const navigate = useNavigate();
 	const { id } = useParams();
-	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: Number(id) });
+	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: Number(id) });
 
 	// добавление товара в корзину
 	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
@@ -26,8 +25,7 @@ export function Product() {
 	};
 
 	if (isError) {
-		getErrorToast('Ошибка при получении данных о товаре');
-		navigate('/');
+		return <ErrorPage error={error}/>
 	}
 
 	return (

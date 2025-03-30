@@ -4,12 +4,11 @@ import { useGetDetailProductQuery, Variation } from '../../../../redux/api/produ
 import { ChoicePizzaForm, PizzaVariation } from './ChoicePizzaForm.tsx';
 import { ChoiceProductForm } from './ChoiceProductForm';
 import { CategoriesId } from '../../constants.ts';
-import { getErrorToast } from '../../../../lib';
-import { useNavigate } from 'react-router-dom';
 import { addProductToCart } from '../../utils';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../../../redux/store.ts';
 import { setLoadingStatus } from '../../../../redux/slices/productModalSlice.ts';
+import { ErrorPage } from '../../../../pages/errors';
 
 
 interface Props {
@@ -26,10 +25,9 @@ interface Props {
  */
 export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 
-	const navigate = useNavigate();
 	const dispatch = useDispatch<AppDispatch>()
 
-	const { data, isLoading, isSuccess, isError } = useGetDetailProductQuery({ product_id: productId });
+	const { data, isLoading, isSuccess, isError, error } = useGetDetailProductQuery({ product_id: productId });
 
 	// добавление товара в корзину
 	const onSubmit = async (variationId: number, ingredientsId?: number[]) => {
@@ -44,10 +42,9 @@ export const ProductForm: React.FC<Props> = ({ productId, closeModal }) => {
 	}, [data, isSuccess])
 
 	if (isError) {
-		getErrorToast('Ошибка при получении данных о товаре');
 		dispatch(setLoadingStatus(false));
 		closeModal?.();
-		navigate('/');
+		return <ErrorPage error={error}/>
 	}
 
 	if (isSuccess) {

@@ -1,11 +1,10 @@
-import React from 'react';
 import { useTitle } from 'react-use';
 
 import { Container } from '../../components/layout';
 import { CarouselMain, NotResults, ProductsGroupList } from '../../features/catalog/components';
 import { useGetAllProductsQuery } from '../../redux/api';
-import { getErrorToast } from '../../lib';
 import { ProductsGroupListSkeleton } from '../../features/catalog/components/products';
+import { ErrorPage } from '../errors';
 
 
 /**
@@ -16,13 +15,11 @@ export function Main() {
 
 	useTitle('ДОДО ПИЦЦА - самая вкусная пицца во вселенной!');
 
-	const { data, isLoading, isSuccess, isError } = useGetAllProductsQuery();
+	const { data, isLoading, isSuccess, isError, error } = useGetAllProductsQuery();
 
-	React.useEffect(() => {
-		if (isError) {
-			getErrorToast('Ошибка при получении данных');
-		}
-	}, [isError]);
+	if (isError) {
+		return <ErrorPage error={error}/>
+	}
 
 	return (
 		<div>

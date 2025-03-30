@@ -16,12 +16,12 @@ import {
 import { AppDispatch } from '../../redux/store.ts';
 import { selectCategory, setActiveCategoryId } from '../../redux/slices/categorySlice.ts';
 import { useGetFilterProductsQuery } from '../../redux/api';
-import { getErrorToast } from '../../lib';
 import { PaginationProduct } from '../../features/catalog/components';
 import { useFiltersParams, useQueryFilters } from '../../features/catalog/hooks';
 import { getFilterParams } from '../../features/catalog/utils';
 import { Skeleton } from '../../components/ui';
 import { ProductListSkeleton } from '../../features/catalog/components/products';
+import { ErrorPage } from '../errors';
 
 
 /**
@@ -39,23 +39,21 @@ export function Category() {
 
 	const filters = useFiltersParams(id);
 	const params = getFilterParams(filters, id, pageSize);
-	const { data, isLoading, isSuccess, isError } = useGetFilterProductsQuery(params);
+	const { data, isLoading, isSuccess, isError, error } = useGetFilterProductsQuery(params);
 	const foundCategory = categories.find(category => category.id === Number(id)) ?? { name: 'Товары' };
 
 	useQueryFilters(filters);  // запись параметров фильтрации в URL
 
 	useTitle(`ДОДО ПИЦЦА - выбор товаров среди "${foundCategory.name}"`);
 
-	React.useEffect(() => {
-		if (isError) {
-			filters.page > 1 ? filters.setPage(1) : getErrorToast('Ошибка при получении данных');
-		}
-	}, [isError]);
-
 	// установка активной категории
 	React.useEffect(() => {
 		id && dispatch(setActiveCategoryId(Number(id)));
 	}, [id]);
+
+	if (isError) {
+		return <ErrorPage error={error}/>
+	}
 
 	return (
 		<div>
