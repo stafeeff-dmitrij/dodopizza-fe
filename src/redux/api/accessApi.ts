@@ -13,6 +13,9 @@ export const accessApi = baseApi.injectEndpoints({
         url: 'access/request/',
         method: 'POST',
         body,
+        headers: {
+          'X-CSRFToken': 'Cin3qVaoBDcMsl70Td88kduI0F1jEjS7',
+        },
       }),
     }),
   }),

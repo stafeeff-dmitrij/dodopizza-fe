@@ -18,7 +18,6 @@ export function Main() {
 	const { data, isLoading, isSuccess, isError, error } = useGetAllProductsQuery();
 
 	if (isError) {
-		console.error('Ошибка');
 		return <ErrorPage error={error}/>
 	}
 
