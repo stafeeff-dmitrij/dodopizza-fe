@@ -4,7 +4,7 @@
 и поиска товаров, регистрацией (смс, email), авторизацией, добавлением товаров в корзину, оформлением заказов,
 просмотром истории заказов и оплатой заказов через сервис ЮКассы.
 
-**API + демо** - https://github.com/stafeeff-dmitrij/dodopizza-be
+**API + демо** - https://github.com/stafeeff-dmitrij/dodopizza-be-drf
 
 ## Инструменты
 * **Typescript**;
